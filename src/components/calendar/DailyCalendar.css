@@ -1,0 +1,11 @@
+.daily-calendar{
+    width: 90%;
+    height: 80%;
+    margin: 5%;
+    background-color: aqua;
+}
+
+.calendar-event{
+    width: 20%;
+    background-color: red;
+}
