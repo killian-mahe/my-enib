@@ -1,0 +1,7 @@
+{
+  "name": "ENIB",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
