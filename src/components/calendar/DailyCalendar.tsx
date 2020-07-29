@@ -21,6 +21,9 @@ const DailyCalendar : React.FC<CalendarProps> = () => {
 
     return (
         <div className="daily-calendar">
+            <div className="hours-column">
+
+            </div>
             {renderedEvents}
         </div>
     );

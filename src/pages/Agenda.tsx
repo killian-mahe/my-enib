@@ -9,13 +9,13 @@ const Agenda: React.FC = () => {
   return (
     
     <IonPage>
-      <IonContent>
-        <IonHeader>
-          <IonToolbar>
-            <IonTitle><IonIcon icon={calendarOutline} /> Agenda</IonTitle>
-          </IonToolbar>
-        </IonHeader>
+      <IonHeader>
+        <IonToolbar>
+          <IonTitle><IonIcon icon={calendarOutline} /> Agenda</IonTitle>
+        </IonToolbar>
+      </IonHeader>
         
+      <IonContent>
         <IonToolbar>
           <IonSegment value="all">
             <IonSegmentButton value="all">Jour</IonSegmentButton>
