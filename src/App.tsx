@@ -10,10 +10,10 @@ import {
   IonTabs
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { ellipse, square, calendarOutline } from 'ionicons/icons';
+import { ellipse, settingsOutline, calendarOutline } from 'ionicons/icons';
 import Agenda from './pages/Agenda';
 import Tab2 from './pages/Tab2';
-import Tab3 from './pages/Tab3';
+import Settings from './pages/Settings';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -41,7 +41,7 @@ const App: React.FC = () => (
         <IonRouterOutlet>
           <Route path="/agenda" component={Agenda} exact={true} />
           <Route path="/tab2" component={Tab2} exact={true} />
-          <Route path="/tab3" component={Tab3} />
+          <Route path="/settings" component={Settings} />
           <Route path="/" render={() => <Redirect to="/agenda" />} exact={true} />
         </IonRouterOutlet>
         <IonTabBar slot="bottom">
@@ -53,9 +53,9 @@ const App: React.FC = () => (
             <IonIcon icon={ellipse} />
             <IonLabel>Tab 2</IonLabel>
           </IonTabButton>
-          <IonTabButton tab="tab3" href="/tab3">
-            <IonIcon icon={square} />
-            <IonLabel>Tab 3</IonLabel>
+          <IonTabButton tab="settings" href="/settings">
+            <IonIcon icon={settingsOutline} />
+            <IonLabel>Paramètres</IonLabel>
           </IonTabButton>
         </IonTabBar>
       </IonTabs>
