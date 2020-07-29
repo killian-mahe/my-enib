@@ -3,26 +3,12 @@ import './DailyCalendar.css';
 import { IonIcon } from '@ionic/react';
 import { ellipse, alarmOutline } from 'ionicons/icons';
 import CalendarEvent from '../../models/CalendarEvent';
+import VisualTimer from './VisualTimer';
 
 interface CalendarProps {
 
 };
 
-function getWaitTime(event: CalendarEvent) {
-    let duration: number = (event.stop.getTime() - event.start.getTime())/(1000 * 60);
-    let pendingTime = (event.start.getTime() - Date.now())/(1000 * 60);
-    
-    pendingTime = Math.round(pendingTime);
-    if (pendingTime < 0) {
-        if (Math.abs(pendingTime) < duration) {
-            return "En cours";
-        } else {
-            return "Done";
-        }
-    } else {
-        return (pendingTime > 60) ? Math.round(pendingTime/60) + " h" : Math.round(pendingTime) + " min";
-    }
-}
 
 function DailyEvent(props: any) {
     const [event, setEvent] = useState<CalendarEvent>(props.event);
@@ -38,7 +24,7 @@ function DailyEvent(props: any) {
                     </div>
                     <div className="justify-between flex w-full">
                         <div className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">{event.course.classRoom}</div>
-                        <div className="bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 items-center flex"><IonIcon icon={alarmOutline} className="mr-1"/> {getWaitTime(event)}</div>
+                        <VisualTimer start={event.start.getTime()} stop={event.stop.getTime()} />
                     </div>
                 </div>
             </div>
