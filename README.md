@@ -32,7 +32,7 @@ npm run test
 
 * Website: https://www.linkedin.com/in/killian-mah%C3%A9-246928135/
 * Github: [@killian-mahe](https://github.com/killian-mahe)
-* LinkedIn: [@Killian Mahé](https://linkedin.com/in/Killian Mahé)
+* LinkedIn: [@Killian Mahé](https://www.linkedin.com/in/killian-mah%C3%A9-246928135/)
 
 ## 🤝 Contributing
 
