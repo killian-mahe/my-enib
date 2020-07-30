@@ -44,7 +44,7 @@ export const apiClient: AxiosInstance = axios.create({
   }
 });
 
-const App: React.FC = () => {
+function App() {
 
   return (
     <IonApp>

@@ -5,21 +5,19 @@ import { apiClient } from '../../App';
 import DailyEvent from './DailyEvent';
 import { plainToClass } from 'class-transformer';
 
-interface CalendarProps {
-
-};
-
-const DailyCalendar : React.FC<CalendarProps> = () => {
+function DailyCalendar() {
 
     const [events, setEvents] = useState<CalendarEvent[]>();
 
     useEffect(() => {
-        apiClient.get<CalendarEvent[]>('/events').then((response) => {
-            let eventsClass = plainToClass(CalendarEvent, response.data).sort((a, b) => {
+        const fetchData = async () => {
+            const response = await apiClient.get<CalendarEvent[]>('/events')
+            setEvents(plainToClass(CalendarEvent, response.data).sort((a, b) => {
                 return a.start.getTime() - b.start.getTime();
-            });
-            setEvents(eventsClass);
-        })
+            }));
+        }
+
+        fetchData();
     }, []);
 
 

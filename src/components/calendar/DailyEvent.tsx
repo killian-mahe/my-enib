@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { IonIcon } from '@ionic/react';
 import { ellipse } from 'ionicons/icons';
 import VisualTimer from './VisualTimer';
 import CalendarEvent from '../../models/CalendarEvent';
 
-function DailyEvent(props: any) {
+interface DailyEventProps {
+    event: CalendarEvent
+}
+
+function DailyEvent(props: DailyEventProps) {
 
     return (
         <div className="rounded overflow-hidden shadow-lg bg-white w-full mb-3">
