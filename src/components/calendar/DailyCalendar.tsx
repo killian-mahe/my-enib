@@ -25,7 +25,7 @@ function DailyCalendar() {
 
 
     return (
-        <div className="container p-5 h-full bg-gray-100">
+        <div className="container p-5 min-h-full bg-gray-100">
             <IonRefresher className="z-10" slot="fixed" onIonRefresh={(event) => fetchData().then(() => event.detail.complete())}>
                 <IonRefresherContent refreshingSpinner="circles"></IonRefresherContent>
             </IonRefresher>
