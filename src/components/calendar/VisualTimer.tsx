@@ -8,10 +8,12 @@ interface VisualTimerProps {
 }
 
 function VisualTimer(props: VisualTimerProps) {
-    const [startTime, setStartTime] = useState(props.start);
-    const [stopTime, setStopTime] = useState(props.stop);
     
-    return <div className="bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 items-center flex"><IonIcon icon={alarmOutline} className="mr-1"/> {_getWaitTime(startTime, stopTime)}</div>;
+    return (
+    <div className="bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 items-center flex">
+        <IonIcon icon={alarmOutline} className="mr-1"/> {_getWaitTime(props.start, props.stop)}
+    </div>
+    );
 }
 
 function _getWaitTime(start: number, stop: number) {
