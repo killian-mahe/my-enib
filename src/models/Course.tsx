@@ -1,5 +1,5 @@
 class Course {
-    constructor(name: string, professor: string, classRoom: string, color: string) {
+    constructor(name: string, professor: string, classRoom: string, color: string = "primary") {
         this.name = name;
         this.professor = professor;
         this.classRoom = classRoom;
@@ -9,7 +9,7 @@ class Course {
     name: string;
     professor: string;
     classRoom: string;
-    color: string;
+    color: string = "primary";
 }
 
 export default Course;

@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
 import {
@@ -15,7 +16,6 @@ import Agenda from './pages/Agenda';
 import Tab2 from './pages/Tab2';
 import Settings from './pages/Settings';
 import axios, {AxiosInstance} from 'axios';
-import 'reflect-metadata';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
