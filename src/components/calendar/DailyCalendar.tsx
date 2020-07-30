@@ -25,10 +25,11 @@ function DailyCalendar() {
 
 
     return (
-        <div className="container p-5 bg-gray-100">
+        <div className="container p-5 h-full bg-gray-100">
             <IonRefresher className="z-10" slot="fixed" onIonRefresh={(event) => fetchData().then(() => event.detail.complete())}>
                 <IonRefresherContent refreshingSpinner="circles"></IonRefresherContent>
             </IonRefresher>
+            {(!events) ? <div className="flex h-full items-center justify-center text-lg font-sans font-light text-blue-900">Chargement de l'agenda...</div> : <div></div>}
             {
                 events?.map((event) => {
                     return <DailyEvent event={event} key={event.id}/>
