@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { IonIcon } from '@ionic/react';
 import { alarmOutline } from 'ionicons/icons';
 
