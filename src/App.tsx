@@ -15,6 +15,7 @@ import { ellipse, settingsOutline, calendarOutline } from 'ionicons/icons';
 import Agenda from './pages/Agenda';
 import Tab2 from './pages/Tab2';
 import Settings from './pages/Settings';
+import Event from './pages/EventDetail';
 import axios, {AxiosInstance} from 'axios';
 
 /* Core CSS required for Ionic components to work properly */
@@ -35,6 +36,7 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import EventDetail from './pages/EventDetail';
 
 export const apiClient: AxiosInstance = axios.create({
   baseURL: 'https://5f21742fdaa42f0016665b91.mockapi.io/api/v1',
@@ -51,9 +53,18 @@ function App() {
       <IonReactRouter>
         <IonTabs>
           <IonRouterOutlet>
-            <Route path="/agenda" component={Agenda} exact={true} />
-            <Route path="/tab2" component={Tab2} exact={true} />
-            <Route path="/settings" component={Settings} />
+            <Route path="/agenda" exact>
+              <Agenda />
+            </Route>
+            <Route path="/tab2" exact>
+              <Tab2 />
+            </Route>
+            <Route path="/settings" >
+              <Settings />
+            </Route>
+            <Route path="/event/:id" exact>
+              <EventDetail />
+            </Route>
             <Route path="/" render={() => <Redirect to="/agenda" />} exact={true} />
           </IonRouterOutlet>
           <IonTabBar slot="bottom">
