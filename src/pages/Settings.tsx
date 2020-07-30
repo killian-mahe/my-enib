@@ -2,7 +2,7 @@ import React from 'react';
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import './Settings.css';
 
-const Settings: React.FC = () => {
+function Settings() {
   return (
     <IonPage>
       <IonHeader>

@@ -5,7 +5,7 @@ import { calendarOutline } from 'ionicons/icons';
 import './Agenda.css';
 import DailyCalendar from '../components/calendar/DailyCalendar';
 
-const Agenda: React.FC = () => {
+function Agenda() {
   return (
     
     <IonPage>

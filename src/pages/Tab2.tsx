@@ -2,7 +2,7 @@ import React from 'react';
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import './Tab2.css';
 
-const Tab2: React.FC = () => {
+function Tab2() {
   return (
     <IonPage>
       <IonHeader>
