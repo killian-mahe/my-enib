@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Redirect, Route } from 'react-router-dom';
 import {
   IonApp,
@@ -17,7 +17,11 @@ import Tab2 from './pages/Tab2';
 import Settings from './pages/Settings';
 import EventDetail from './pages/EventDetail';
 import axios, {AxiosInstance} from 'axios';
+
+/* Firebase imports */
 import firebase from 'firebase/app';
+import 'firebase/analytics';
+import 'firebase/auth';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -48,19 +52,24 @@ export const apiClient: AxiosInstance = axios.create({
 
 function App() {
 
-  let firebaseConfig = {
-    apiKey: "AIzaSyD-X14crhzKPOjhelemwOViUCiDUwe07S0",
-    authDomain: "my-enib.firebaseapp.com",
-    databaseURL: "https://my-enib.firebaseio.com",
-    projectId: "my-enib",
-    storageBucket: "my-enib.appspot.com",
-    messagingSenderId: "108129884581",
-    appId: "1:108129884581:web:9ea683ac6247eeecd5b04c",
-    measurementId: "G-N81W0VRB1S"
-  };
+  useEffect(() => {
 
-  firebase.initializeApp(firebaseConfig);
-  firebase.analytics();
+    let firebaseConfig = {
+      apiKey: "AIzaSyD-X14crhzKPOjhelemwOViUCiDUwe07S0",
+      authDomain: "my-enib.firebaseapp.com",
+      databaseURL: "https://my-enib.firebaseio.com",
+      projectId: "my-enib",
+      storageBucket: "my-enib.appspot.com",
+      messagingSenderId: "108129884581",
+      appId: "1:108129884581:web:9ea683ac6247eeecd5b04c",
+      measurementId: "G-N81W0VRB1S"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+  }, []);
+
+
 
   return (
     <IonApp>
