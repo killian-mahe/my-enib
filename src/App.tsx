@@ -15,8 +15,9 @@ import { ellipse, settingsOutline, calendarOutline } from 'ionicons/icons';
 import Agenda from './pages/Agenda';
 import Tab2 from './pages/Tab2';
 import Settings from './pages/Settings';
-import Event from './pages/EventDetail';
+import EventDetail from './pages/EventDetail';
 import axios, {AxiosInstance} from 'axios';
+import firebase from 'firebase/app';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -36,7 +37,6 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
-import EventDetail from './pages/EventDetail';
 
 export const apiClient: AxiosInstance = axios.create({
   baseURL: 'https://5f21742fdaa42f0016665b91.mockapi.io/api/v1',
@@ -47,6 +47,20 @@ export const apiClient: AxiosInstance = axios.create({
 });
 
 function App() {
+
+  let firebaseConfig = {
+    apiKey: "AIzaSyD-X14crhzKPOjhelemwOViUCiDUwe07S0",
+    authDomain: "my-enib.firebaseapp.com",
+    databaseURL: "https://my-enib.firebaseio.com",
+    projectId: "my-enib",
+    storageBucket: "my-enib.appspot.com",
+    messagingSenderId: "108129884581",
+    appId: "1:108129884581:web:9ea683ac6247eeecd5b04c",
+    measurementId: "G-N81W0VRB1S"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
 
   return (
     <IonApp>
