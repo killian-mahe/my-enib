@@ -31,12 +31,12 @@
     "typescript": "3.8.3"
   },
   "scripts": {
-    "start": "npm run watch:css && react-scripts start",
+    "start": "npm run build:css && react-scripts start",
     "build": "npm run build:css && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "build:css": "postcss src/assets/tailwind.css -o src/assets/main.css",
-    "watch:css": "postcss src/assets/tailwind.css -o src/assets/main.css"
+    "ionic:build:before": "npm run build:css",
+    "build:css": "postcss src/assets/tailwind.css -o src/assets/main.css"
   },
   "eslintConfig": {
     "extends": "react-app"
