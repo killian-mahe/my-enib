@@ -24,7 +24,7 @@ function Welcome() {
     useEffect(() => {
         slidesRef.current.addEventListener('ionSlideNextStart', () => {
             slidesRef.current.getActiveIndex().then((index) => {
-                if (index == 2) {
+                if (index === 2) {
                     buttonRef.current.classList.add('opacity-0');
                 }
             });
@@ -32,6 +32,7 @@ function Welcome() {
         slidesRef.current.addEventListener('ionSlidePrevStart', () => {
             buttonRef.current.classList.remove('opacity-0');
         });
+    // eslint-disable-next-line
     }, []);
 
     return (
