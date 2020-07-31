@@ -19,7 +19,6 @@ function DailyCalendar() {
     }
 
     useEffect(() => {
-
         fetchData();
     }, []);
 

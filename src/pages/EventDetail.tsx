@@ -14,10 +14,10 @@ function EventDetail() {
         const response = await apiClient.get<CalendarEvent>(`/events/${id}`)
         setEvent(plainToClass(CalendarEvent, response.data));
     }
-
+    
     useEffect(() => {
-
         fetchData();
+        // eslint-disable-next-line
     }, []);
 
     return (

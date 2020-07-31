@@ -14442,6 +14442,10 @@ video {
   animation: bounce 1s infinite;
 }
 
+.animate-bounce-slow {
+  animation: bounce 3s infinite;
+}
+
 @media (min-width: 640px) {
   .sm\:container {
     width: 100%;
@@ -28262,6 +28266,10 @@ video {
 
   .sm\:animate-bounce {
     animation: bounce 1s infinite;
+  }
+
+  .sm\:animate-bounce-slow {
+    animation: bounce 3s infinite;
   }
 }
 
@@ -42086,6 +42094,10 @@ video {
   .md\:animate-bounce {
     animation: bounce 1s infinite;
   }
+
+  .md\:animate-bounce-slow {
+    animation: bounce 3s infinite;
+  }
 }
 
 @media (min-width: 1024px) {
@@ -55909,6 +55921,10 @@ video {
   .lg\:animate-bounce {
     animation: bounce 1s infinite;
   }
+
+  .lg\:animate-bounce-slow {
+    animation: bounce 3s infinite;
+  }
 }
 
 @media (min-width: 1280px) {
@@ -69731,5 +69747,9 @@ video {
 
   .xl\:animate-bounce {
     animation: bounce 1s infinite;
+  }
+
+  .xl\:animate-bounce-slow {
+    animation: bounce 3s infinite;
   }
 }
