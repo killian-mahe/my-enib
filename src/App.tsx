@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Redirect, Route } from 'react-router-dom';
 import {
   IonApp,
@@ -16,6 +16,7 @@ import Agenda from './pages/Agenda';
 import Tab2 from './pages/Tab2';
 import Settings from './pages/Settings';
 import EventDetail from './pages/EventDetail';
+import Welcome from './pages/Welcome';
 import axios, {AxiosInstance} from 'axios';
 
 /* Firebase imports */
@@ -51,6 +52,8 @@ export const apiClient: AxiosInstance = axios.create({
 });
 
 function App() {
+  
+  let [user, setUser] = useState<firebase.User>();
 
   useEffect(() => {
 
@@ -67,9 +70,15 @@ function App() {
 
     firebase.initializeApp(firebaseConfig);
     firebase.analytics();
+
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        setUser(user);
+      }
+    });
   }, []);
 
-
+  if (!user) return <Welcome />
 
   return (
     <IonApp>
