@@ -54,8 +54,7 @@ export const apiClient: AxiosInstance = axios.create({
 
 function App() {
   
-  let [user, setUser] = useState<firebase.User>();
-  let [auth, setAuth] = useState<boolean>(false);
+  let [user, setUser] = useState<firebase.User | null>();
 
   useEffect(() => {
 
@@ -76,14 +75,16 @@ function App() {
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         setUser(user);
-        setAuth(true);
+      }
+      else {
+        setUser(null);
       }
     });
   }, []);
 
-  if (auth === false) return <IonApp><div className="flex h-full items-center justify-center"><IonSpinner className="transform scale-150" name="crescent" /></div></IonApp>;
+  if (user === undefined) return <IonApp><div className="flex h-full items-center justify-center"><IonSpinner className="transform scale-150" name="crescent" /></div></IonApp>;
 
-  if (!user) return <Welcome />
+  if (user === null) return <Welcome />
 
   return (
     <IonApp>
