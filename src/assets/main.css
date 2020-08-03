@@ -14446,6 +14446,35 @@ video {
   animation: bounce 3s infinite;
 }
 
+.h-p-75 {
+  height: 75%;
+}
+
+.h-p-50 {
+  height: 50%;
+}
+
+.h-p-25 {
+  height: 25%;
+}
+
+.top-100 {
+  top: 100%;
+}
+
+.bottom-100 {
+  bottom: 100%;
+}
+
+.rounded-t-xl {
+  border-top-left-radius: 3.5rem;
+  border-top-right-radius: 3.5rem;
+}
+
+.rounded-xl {
+  border-radius: 3.5rem;
+}
+
 @media (min-width: 640px) {
   .sm\:container {
     width: 100%;

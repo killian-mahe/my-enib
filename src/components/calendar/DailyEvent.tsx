@@ -1,18 +1,18 @@
-import React from 'react';
+import React, { PropsWithRef } from 'react';
 import { IonIcon } from '@ionic/react';
 import { ellipse } from 'ionicons/icons';
 import VisualTimer from './VisualTimer';
 import CalendarEvent from '../../models/CalendarEvent';
 import { useHistory } from 'react-router-dom';
 
-interface DailyEventProps {
-    event: CalendarEvent
+interface DailyEventProps{
+    event: CalendarEvent;
 }
 
 function DailyEvent(props: DailyEventProps) {
     const history = useHistory();
     return (
-            <div className="rounded overflow-hidden shadow-lg bg-white w-full mb-3" onClick={() => history.push(`/event/${props.event.id}`)}>
+            <div className="rounded overflow-hidden shadow-lg bg-white w-full" /*onClick={() => history.push(`/event/${props.event.id}`)}*/>
                 <div className="px-3 py-2">
                     <div className="font-bold text-md mb-2 items-center flex"><IonIcon icon={ellipse} color={props.event.course[0].color} className="mr-2"/> {props.event.course[0].name}</div>
                     <div className="grid grid-rows-2 w-full">

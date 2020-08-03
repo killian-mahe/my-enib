@@ -100,9 +100,6 @@ function App() {
             <Route path="/settings" >
               <Settings />
             </Route>
-            <Route path="/event/:id" exact>
-              <EventDetail />
-            </Route>
             <Route path="/" render={() => <Redirect to="/agenda" />} exact={true} />
           </IonRouterOutlet>
           <IonTabBar slot="bottom">
