@@ -8,6 +8,7 @@ import {
   IonRouterOutlet,
   IonTabBar,
   IonTabButton,
+  IonSpinner,
   IonTabs
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
@@ -54,6 +55,7 @@ export const apiClient: AxiosInstance = axios.create({
 function App() {
   
   let [user, setUser] = useState<firebase.User>();
+  let [auth, setAuth] = useState<boolean>(false);
 
   useEffect(() => {
 
@@ -74,9 +76,12 @@ function App() {
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         setUser(user);
+        setAuth(true);
       }
     });
   }, []);
+
+  if (auth === false) return <IonApp><div className="flex h-full items-center justify-center"><IonSpinner className="transform scale-150" name="crescent" /></div></IonApp>;
 
   if (!user) return <Welcome />
 
