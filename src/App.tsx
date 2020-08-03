@@ -16,7 +16,6 @@ import { ellipse, settingsOutline, calendarOutline } from 'ionicons/icons';
 import Agenda from './pages/Agenda';
 import Tab2 from './pages/Tab2';
 import Settings from './pages/Settings';
-import EventDetail from './pages/EventDetail';
 import Welcome from './pages/Welcome';
 import axios, {AxiosInstance} from 'axios';
 
