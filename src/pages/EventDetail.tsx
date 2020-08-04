@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 import CalendarEvent from '../models/CalendarEvent';
 import { IonIcon } from '@ionic/react';
 import { chevronBack } from 'ionicons/icons';
@@ -9,7 +9,7 @@ interface EventDetailProps {
     onClose?(): void;
 }
 
-const EventDetail = forwardRef<HTMLDivElement, EventDetailProps>((props, ref) => {
+function EventDetail(props: EventDetailProps) {
     
     return (
             <div className={`p-6 ${props.className}`}>
@@ -25,7 +25,7 @@ const EventDetail = forwardRef<HTMLDivElement, EventDetailProps>((props, ref) =>
                 </div>
             </div>
     );
-});
+}
 
 interface RowProps {
     attribute: string;

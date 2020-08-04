@@ -42,6 +42,10 @@ function DailyCalendar() {
         }, 500);
     }
 
+    const handleOnEventClick = (eventId: number) => {
+        if (!detailEvent) loadEvent(eventId);
+    }
+
     return (
         <div className="container p-5 min-h-full bg-gray-100">
             <IonRefresher className="z-10" slot="fixed" onIonRefresh={(event) => fetchData().then(() => event.detail.complete())}>
@@ -51,7 +55,7 @@ function DailyCalendar() {
                 {(!events) ? <div className="flex h-full items-center justify-center text-lg font-sans font-light text-blue-900">Chargement de l'agenda...</div> : <div></div>}
                 {
                     events?.map((event) => {
-                        return <div className="mb-3" onClick={() => loadEvent(event.id)} key={event.id}><DailyEvent event={event}/></div>
+                        return <div className="mb-3" onClick={() => handleOnEventClick(event.id)} key={event.id}><DailyEvent event={event}/></div>
                     })
                 }
             </div>
