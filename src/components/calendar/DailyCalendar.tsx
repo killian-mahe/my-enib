@@ -43,7 +43,7 @@ function DailyCalendar() {
                     return <div className="mb-3" onClick={() => loadEvent(event.id)} key={event.id}><DailyEvent event={event}/></div>
                 })
             }
-            {detailEvent ? <div ref={detailRef} className="fixed bottom-0 left-0 right-0 h-p-75 top-100 transition-transform transform -translate-y-full duration-500 ease-in-out rounded-t-xl bg-white"><EventDetail event={detailEvent} onClose={() => {setDetailEvent(undefined)}}/></div>:<div></div>}
+            {detailEvent ? <div ref={detailRef} className="fixed bottom-0 left-0 right-0 h-3/4 top-full transition-transform transform -translate-y-full duration-500 ease-in-out rounded-t-xl bg-white"><EventDetail event={detailEvent} onClose={() => {setDetailEvent(undefined)}}/></div>:<div></div>}
         </div>
     );
 };

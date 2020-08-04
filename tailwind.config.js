@@ -4,6 +4,20 @@ module.exports = {
     extend: {
       animation: {
         'bounce-slow': 'bounce 3s infinite',
+      },
+      borderRadius: {
+        'xl': '3.5rem'
+      },
+      height: {
+        '1/4': '25%',
+        'half': '50%',
+        '3/4': '75%',
+      },
+      inset: {
+        '1/4': '25%',
+        'half': '50%',
+        '3/4': '75%',
+        'full': '100%'
       }
     },
   },
