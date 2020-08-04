@@ -12,8 +12,11 @@ interface EventDetailProps {
 const EventDetail = forwardRef<HTMLDivElement, EventDetailProps>((props, ref) => {
     
     return (
-            <div className={"p-5 "+props.className}>
-                <IonIcon icon={chevronBack} onClick={() => { if(props.onClose) props.onClose() }}/>
+            <div className={`p-6 ${props.className}`}>
+                <div className="flex items-center w-auto mb-4" onClick={() => { if(props.onClose) props.onClose() }}>
+                    <IonIcon icon={chevronBack} className="text-blue-800" size='large'/>
+                    <span className="text-base text-blue-800 font-sans font-bold">Back</span>
+                </div>
                 <div className="text-2xl justify-center font-sans font-medium">{props.event.course[0].name}</div>
                 <div className="grid grid-cols-1 mt-3 divide-y divide-gray-300">
                     <Row attribute="Professeur" value={props.event.course[0].professor}/>
