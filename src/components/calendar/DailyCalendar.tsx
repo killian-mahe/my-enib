@@ -5,6 +5,7 @@ import { apiClient } from '../../App';
 import DailyEvent from './DailyEvent';
 import { plainToClass } from 'class-transformer';
 import EventDetail from '../../pages/EventDetail';
+import { Divider } from '../../components/Utilities';
 
 interface DayliCalendarProps {
     onEventSelectedChanged?(selected: boolean): void;
@@ -24,6 +25,10 @@ function DailyCalendar(props: DayliCalendarProps) {
             return a.start.getTime() - b.start.getTime();
         }));
     }
+
+    let passedEvents = events?.filter((event: CalendarEvent) => {return event.stop.getTime() < Date.now() ? true : false;})
+    let currentEvents = events?.filter((event: CalendarEvent) => {return event.start.getTime() < Date.now() && event.stop.getTime() > Date.now() ? true : false;})
+    let nextEvents = events?.filter((event: CalendarEvent) => {return event.start.getTime() > Date.now() ? true : false;})
 
     useEffect(() => {
         fetchData();
@@ -53,15 +58,28 @@ function DailyCalendar(props: DayliCalendarProps) {
     }
 
     return (
-        <div className="container p-5 min-h-full bg-gray-100">
+        <div className="container min-h-full bg-gray-100 background-pattern">
             <IonRefresher className="z-10" slot="fixed" onIonRefresh={(event) => fetchData().then(() => event.detail.complete())}>
                 <IonRefresherContent refreshingSpinner="circles"></IonRefresherContent>
             </IonRefresher>
             <div ref={opacityRef} className="transition-opacity duration-500 ease-in-out">
                 {(!events) ? <div className="flex h-full items-center justify-center text-lg font-sans font-light text-blue-900">Chargement de l'agenda...</div> : <div></div>}
+                <Divider className="sticky top-0 bg-gray-100 shadow-sm py-1" label="Cours passés"/>
                 {
-                    events?.map((event) => {
-                        return <div className="mb-3" onClick={() => handleOnEventClick(event.id)} key={event.id}><DailyEvent event={event}/></div>
+                    events?.slice(1).map((event) => {
+                        return <div className="my-3 mx-5 shadow-md" onClick={() => handleOnEventClick(event.id)} key={event.id}><DailyEvent event={event}/></div>
+                    })
+                }
+                <Divider className="sticky top-0 bg-gray-100 shadow-sm py-1" label="Actuellement"/>
+                {
+                    currentEvents?.map((event) => {
+                        return <div className="my-3 mx-5 shadow-md" onClick={() => handleOnEventClick(event.id)} key={event.id}><DailyEvent event={event}/></div>
+                    })
+                }
+                <Divider className="sticky top-0 bg-gray-100 shadow-sm py-1" label="Prochain cours"/>
+                {
+                    nextEvents?.map((event) => {
+                        return <div className="my-3 mx-5 shadow-md" onClick={() => handleOnEventClick(event.id)} key={event.id}><DailyEvent event={event}/></div>
                     })
                 }
             </div>
