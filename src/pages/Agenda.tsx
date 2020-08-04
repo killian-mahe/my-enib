@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { IonContent, IonHeader, IonIcon, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import { IonSegment, IonSegmentButton } from '@ionic/react';
 import { calendarOutline } from 'ionicons/icons';
@@ -6,6 +6,13 @@ import './Agenda.css';
 import DailyCalendar from '../components/calendar/DailyCalendar';
 
 function Agenda() {
+
+  const contentRef = useRef() as React.MutableRefObject<HTMLIonContentElement>;
+
+  const handleOnEventSelectedChanged = () => {
+    contentRef.current?.classList.toggle('overflow-hidden-force');
+  }
+
   return (
     
     <IonPage>
@@ -15,7 +22,7 @@ function Agenda() {
         </IonToolbar>
       </IonHeader>
         
-      <IonContent>
+      <IonContent ref={contentRef}>
         <IonToolbar className="z-0">
           <IonSegment value="all">
             <IonSegmentButton value="all">Jour</IonSegmentButton>
@@ -23,7 +30,7 @@ function Agenda() {
           </IonSegment>
         </IonToolbar>
 
-        <DailyCalendar />
+        <DailyCalendar onEventSelectedChanged={handleOnEventSelectedChanged}/>
       </IonContent>
     </IonPage>
   );

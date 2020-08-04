@@ -6,7 +6,11 @@ import DailyEvent from './DailyEvent';
 import { plainToClass } from 'class-transformer';
 import EventDetail from '../../pages/EventDetail';
 
-function DailyCalendar() {
+interface DayliCalendarProps {
+    onEventSelectedChanged?(selected: boolean): void;
+}
+
+function DailyCalendar(props: DayliCalendarProps) {
 
     const [events, setEvents] = useState<CalendarEvent[]>();
     const [detailEvent, setDetailEvent] = useState<CalendarEvent>();
@@ -30,6 +34,7 @@ function DailyCalendar() {
             if (event.id === eventId) return true;
         })
         setDetailEvent(event);
+        if (props.onEventSelectedChanged) props.onEventSelectedChanged(true);
         detailRef.current?.classList.remove('translate-y-full');
         opacityRef.current?.classList.add('opacity-25');
     }
@@ -37,6 +42,7 @@ function DailyCalendar() {
     const handleDetailClose = () => {
         detailRef.current?.classList.add('translate-y-full');
         opacityRef.current?.classList.remove('opacity-25');
+        if (props.onEventSelectedChanged) props.onEventSelectedChanged(false);
         setTimeout(() => {
             setDetailEvent(undefined)
         }, 500);
