@@ -1,6 +1,4 @@
 import React from 'react';
-import { IonIcon } from '@ionic/react';
-import { alarmOutline } from 'ionicons/icons';
 
 interface VisualTimerProps {
     start: number;

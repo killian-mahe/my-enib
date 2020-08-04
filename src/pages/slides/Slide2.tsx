@@ -1,6 +1,5 @@
 import React from 'react';
-import { IonSlide , IonIcon} from '@ionic/react';
-import { calendarSharp } from 'ionicons/icons';
+import { IonSlide } from '@ionic/react';
 
 function Slide2() {
 

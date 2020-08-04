@@ -1,6 +1,5 @@
 import React from 'react';
-import { IonSlide, IonIcon } from '@ionic/react';
-import { rocketSharp } from 'ionicons/icons';
+import { IonSlide } from '@ionic/react';
 
 function Slide1() {
 

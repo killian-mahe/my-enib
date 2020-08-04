@@ -1,6 +1,4 @@
 import React from 'react';
-import { IonIcon } from '@ionic/react';
-import { ellipse } from 'ionicons/icons';
 import VisualTimer from './VisualTimer';
 import CalendarEvent from '../../models/CalendarEvent';
 
