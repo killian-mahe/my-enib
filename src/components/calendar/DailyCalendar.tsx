@@ -64,19 +64,19 @@ function DailyCalendar(props: DayliCalendarProps) {
             </IonRefresher>
             <div ref={opacityRef} className="transition-opacity duration-500 ease-in-out">
                 {(!events) ? <div className="flex h-full items-center justify-center text-lg font-sans font-light text-blue-900">Chargement de l'agenda...</div> : <div></div>}
-                <Divider className="sticky top-0 bg-gray-100 shadow-sm py-1" label="Cours passés"/>
+                <Divider className="sticky top-0 bg-gray-100 py-1" label="Cours passés"/>
                 {
                     events?.slice(1).map((event) => {
                         return <div className="my-3 mx-5 shadow-md" onClick={() => handleOnEventClick(event.id)} key={event.id}><DailyEvent event={event}/></div>
                     })
                 }
-                <Divider className="sticky top-0 bg-gray-100 shadow-sm py-1" label="Actuellement"/>
+                <Divider className="sticky top-0 bg-gray-100 py-1" label="Actuellement"/>
                 {
                     currentEvents?.map((event) => {
                         return <div className="my-3 mx-5 shadow-md" onClick={() => handleOnEventClick(event.id)} key={event.id}><DailyEvent event={event}/></div>
                     })
                 }
-                <Divider className="sticky top-0 bg-gray-100 shadow-sm py-1" label="Prochain cours"/>
+                <Divider className="sticky top-0 bg-gray-100 py-1" label="Prochain cours"/>
                 {
                     nextEvents?.map((event) => {
                         return <div className="my-3 mx-5 shadow-md" onClick={() => handleOnEventClick(event.id)} key={event.id}><DailyEvent event={event}/></div>
