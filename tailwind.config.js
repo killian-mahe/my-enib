@@ -3,7 +3,7 @@ module.exports = {
   theme: {
     extend: {
       animation: {
-        'bounce-slow': 'bounce 3s infinite',
+        'bounce-slow': 'bounce 5s infinite',
       },
       borderRadius: {
         'xl': '3.5rem'
