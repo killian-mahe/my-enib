@@ -36,6 +36,7 @@ function DailyCalendar(props: DayliCalendarProps) {
 
     const loadEvent = async (eventId : number) => {
         const event = events?.find((event) => {
+            // eslint-disable-next-line
             if (event.id === eventId) return true;
         })
         setDetailEvent(event);
