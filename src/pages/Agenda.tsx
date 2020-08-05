@@ -9,7 +9,7 @@ import WeeklyCalendar from '../components/calendar/WeeklyCalendar';
 function Agenda() {
 
   const contentRef = useRef() as React.MutableRefObject<HTMLIonContentElement>;
-  const [selectedSegment, setSelectedSegment] = useState<string>("daily");
+  const [selectedSegment, setSelectedSegment] = useState<string>("weekly");
 
   const handleOnEventSelectedChanged = () => {
     contentRef.current?.classList.toggle('overflow-hidden-force');
@@ -35,9 +35,8 @@ function Agenda() {
             <IonSegmentButton value="weekly">Semaine</IonSegmentButton>
           </IonSegment>
         </IonToolbar>
-        {
-          selectedSegment === "daily" ? <DailyCalendar onEventSelectedChanged={handleOnEventSelectedChanged}/> : <WeeklyCalendar />
-        }
+          <DailyCalendar onEventSelectedChanged={handleOnEventSelectedChanged} className={selectedSegment === "daily" ? '' : 'hidden'}/>
+          <WeeklyCalendar className={selectedSegment === "weekly" ? '' : 'hidden'}/>
       </IonContent>
     </IonPage>
   );

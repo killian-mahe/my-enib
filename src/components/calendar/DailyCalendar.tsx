@@ -9,6 +9,7 @@ import { Divider } from '../../components/Utilities';
 
 interface DayliCalendarProps {
     onEventSelectedChanged?(selected: boolean): void;
+    className?: string;
 }
 
 function DailyCalendar(props: DayliCalendarProps) {
@@ -59,7 +60,7 @@ function DailyCalendar(props: DayliCalendarProps) {
     }
 
     return (
-        <div className="container min-h-full bg-gray-100 background-pattern">
+        <div className={`container min-h-full bg-gray-100 background-pattern ${props.className}`}>
             <IonRefresher className="z-10" slot="fixed" onIonRefresh={(event) => fetchData().then(() => event.detail.complete())}>
                 <IonRefresherContent refreshingSpinner="circles"></IonRefresherContent>
             </IonRefresher>
@@ -67,7 +68,7 @@ function DailyCalendar(props: DayliCalendarProps) {
                 {(!events) ? <div className="flex h-full items-center justify-center text-lg font-sans font-light text-blue-900">Chargement de l'agenda...</div> : <div></div>}
                 <Divider className="sticky top-0 bg-gray-100 py-1" label="Cours passés"/>
                 {
-                    events?.slice(1).map((event) => {
+                    passedEvents?.map((event) => {
                         return <div className="my-3 mx-5 shadow-md" onClick={() => handleOnEventClick(event.id)} key={event.id}><DailyEvent event={event}/></div>
                     })
                 }
