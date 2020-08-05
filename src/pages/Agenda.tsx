@@ -23,13 +23,13 @@ function Agenda() {
     
     <IonPage>
       <IonHeader className="z-0">
-        <IonToolbar>
+        <IonToolbar mode="ios">
           <IonTitle><IonIcon icon={calendarOutline} /> Agenda</IonTitle>
         </IonToolbar>
       </IonHeader>
         
       <IonContent ref={contentRef}>
-        <IonToolbar className="z-0">
+        <IonToolbar className="z-0" mode="ios">
           <IonSegment value={selectedSegment} onIonChange={handleOnChange}>
             <IonSegmentButton value="daily">Jour</IonSegmentButton>
             <IonSegmentButton value="weekly">Semaine</IonSegmentButton>

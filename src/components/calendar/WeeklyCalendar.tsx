@@ -8,7 +8,6 @@ interface WeeklyCalendarProps {
 
 interface SlidesProps {
     hours: number[];
-    days: string[];
     weeks: Date[];
 }
 
@@ -17,20 +16,19 @@ function WeeklyCalendar(props: WeeklyCalendarProps) {
     const [weeks, setWeeks] = useState<Date[]>();
 
     const hours = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
-    const days = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
 
     useEffect(() => {
         const now = new Date(Date.now());
         let tempWeeks: Date[] = [];
         for (let week = -7; week <= 7; week++) {
-            tempWeeks.push(_add(now, week*7));
+            tempWeeks.push(_getFirstDayOfTheWeek(_add(now, week*7)));
         }
         setWeeks(tempWeeks);
     }, []);
 
     return (
         <div className={`container h-full ${props.className}`}>
-            {weeks ? <Slides hours={hours} days={days} weeks={weeks}/> : <></>}
+            {weeks ? <Slides hours={hours} weeks={weeks}/> : <></>}
         </div>
     );
 }
@@ -48,8 +46,8 @@ function Slides(props: SlidesProps) {
     return (
         <IonSlides className="h-3/2 w-full" ref={slidesRef}>
             {
-                props.weeks?.map(() => {
-                    return <Week hours={props.hours} days={props.days}/>
+                props.weeks?.map((week) => {
+                    return <Week hours={props.hours} startDay={week} key={week.getTime()}/>
                 })
             }
         </IonSlides>
@@ -58,6 +56,10 @@ function Slides(props: SlidesProps) {
 
 function _add(date: Date, days: number) : Date {
     return new Date(date.getTime() + days*24*60*60*1000);
+}
+
+function _getFirstDayOfTheWeek(date: Date) : Date{
+    return new Date(_add(date, 1 - date.getDay()));
 }
 
 export default WeeklyCalendar;
