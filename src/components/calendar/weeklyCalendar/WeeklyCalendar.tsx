@@ -8,6 +8,7 @@ import { _mockEvents } from '../../Utilities';
 
 interface WeeklyCalendarProps {
     className?: string;
+    events: CalendarEvent[];
 }
 
 interface SlidesProps {
@@ -22,20 +23,6 @@ function WeeklyCalendar(props: WeeklyCalendarProps) {
 
     const hours = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
 
-    const [events, setEvents] = useState<CalendarEvent[]>();
-
-    const fetchData = async () => {
-        const response = await apiClient.get<CalendarEvent[]>('/events')
-        
-        // setEvents(plainToClass(CalendarEvent, response.data).sort((a, b) => {
-        //     return a.start.getTime() - b.start.getTime();
-        // }));
-
-        setEvents(_mockEvents().sort((a, b) => {
-            return a.start.getTime() - b.start.getTime();
-        }));
-    }
-
     useEffect(() => {
         const now = new Date(Date.now());
         let tempWeeks: Date[] = [];
@@ -43,12 +30,11 @@ function WeeklyCalendar(props: WeeklyCalendarProps) {
             tempWeeks.push(_getFirstDayOfTheWeek(_add(now, week*7)));
         }
         setWeeks(tempWeeks);
-        fetchData();
     }, []);
 
     return (
         <div className={`container h-full ${props.className}`}>
-            {weeks ? <Slides hours={hours} weeks={weeks} events={events}/> : <></>}
+            {weeks ? <Slides hours={hours} weeks={weeks} events={props.events}/> : <></>}
         </div>
     );
 }
@@ -64,7 +50,7 @@ function Slides(props: SlidesProps) {
     }, [slidesRef]);
 
     return (
-        <IonSlides className="h-5/4 w-full" ref={slidesRef}>
+        <IonSlides className="w-full weekly-calendar" ref={slidesRef}>
             {
                 props.weeks?.map((week) => {
                     return <Week hours={props.hours} startDay={week} key={week.getTime()} events={props.events?.filter((event) => { return event.start.getWeek() === week.getWeek()})}/>

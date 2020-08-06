@@ -10,36 +10,21 @@ import { Divider, _mockEvents } from '../../Utilities';
 interface DayliCalendarProps {
     onEventSelectedChanged?(selected: boolean): void;
     className?: string;
+    events: CalendarEvent[];
 }
 
 function DailyCalendar(props: DayliCalendarProps) {
 
-    const [events, setEvents] = useState<CalendarEvent[]>();
     const [detailEvent, setDetailEvent] = useState<CalendarEvent>();
     const detailRef = useRef() as React.MutableRefObject<HTMLDivElement>;
     const opacityRef = useRef() as React.MutableRefObject<HTMLDivElement>;
-
-    const fetchData = async () => {
-        const response = await apiClient.get<CalendarEvent[]>('/events')
-        
-        // setEvents(plainToClass(CalendarEvent, response.data).sort((a, b) => {
-        //     return a.start.getTime() - b.start.getTime();
-        // }));
-
-        setEvents(_mockEvents().sort((a, b) => {
-            return a.start.getTime() - b.start.getTime();
-        }).filter((event) => {
-            return event.start.toDateString() === new Date(Date.now()).toDateString();
-        }));
-    }
+    let events = props.events?.filter((event) => {
+        return event.start.toDateString() === new Date(Date.now()).toDateString();
+    })
 
     let passedEvents = events?.filter((event: CalendarEvent) => {return event.stop.getTime() < Date.now() ? true : false;})
     let currentEvents = events?.filter((event: CalendarEvent) => {return event.start.getTime() < Date.now() && event.stop.getTime() > Date.now() ? true : false;})
     let nextEvents = events?.filter((event: CalendarEvent) => {return event.start.getTime() > Date.now() ? true : false;})
-
-    useEffect(() => {
-        fetchData();
-    }, []);
 
     const loadEvent = async (eventId : number) => {
         const event = events?.find((event) => {
@@ -67,9 +52,9 @@ function DailyCalendar(props: DayliCalendarProps) {
 
     return (
         <div className={`container min-h-full bg-gray-100 background-pattern ${props.className}`}>
-            <IonRefresher className="z-10" slot="fixed" onIonRefresh={(event) => fetchData().then(() => event.detail.complete())}>
+            {/* <IonRefresher className="z-10" slot="fixed" onIonRefresh={(event) => fetchData().then(() => event.detail.complete())}>
                 <IonRefresherContent refreshingSpinner="circles"></IonRefresherContent>
-            </IonRefresher>
+            </IonRefresher> */}
             <div ref={opacityRef} className="transition-opacity duration-500 ease-in-out">
                 {(!events) ? <div className="flex h-full items-center justify-center text-lg font-sans font-light text-blue-900">Chargement de l'agenda...</div> : <div></div>}
                 <Divider className="sticky top-0 bg-gray-100 py-1" label="Cours passés"/>

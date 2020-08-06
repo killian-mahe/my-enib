@@ -19,7 +19,7 @@ export function DayCol({hours, className, events}: DayProps) {
         <div className={`h-full flex flex-col relative ${className}`}>
             {
                 hoursMap.map((hour) => {
-                    return <div className="flex-1 w-full border-l border-t border-solid border-gray-200" key={hour}></div>
+                    return <div className="flex-1 w-full border-l border-t border-solid border-gray-200 flex items-center" key={hour}><hr className="w-full border-dashed opacity-75 border-gray-200"/></div>
                 })
             }
             {

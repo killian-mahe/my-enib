@@ -14,7 +14,7 @@ export function WeeklyEvent({event, style, className}: WeeklyEvent) {
 
     return (
         <>
-            <div className={`w-full p-1 ${className}`} style={style} onClick={() => setShowAlert(true)}>
+            <div className={`w-full px-1 ${className}`} style={style} onClick={() => setShowAlert(true)}>
                 <div className="bg-blue-500 hover:bg-blue-700 rounded w-full h-full flex flex-col content-around justify-center">
                     <span className="uppercase text-white font-sans font-bold text-sm">{_getAbbrName(event.course[0].name)}</span>
                     <span className="text-white font-sans text-2xs">{event.course[0].classRoom}</span>

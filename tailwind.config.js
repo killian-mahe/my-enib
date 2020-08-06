@@ -34,6 +34,9 @@ module.exports = {
         '2xs': '.625rem',
         '3xs': '.5rem',
         '4xs': '.375rem'
+      },
+      spacing: {
+        'xs': '.125rem'
       }
     },
   },

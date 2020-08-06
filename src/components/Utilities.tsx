@@ -12,10 +12,17 @@ export function Divider (props: DividerProps) {
 
 export function _mockEvents(): CalendarEvent[] {
     return [
-        new CalendarEvent(new Date(2020, 7, 5, 14, 30), new Date(2020, 7, 5, 16, 45), 'Analyse', 'Eric Boucharé', '2E-206', 'blue'),
-        new CalendarEvent(new Date(2020, 7, 5, 8, 30), new Date(2020, 7, 5, 10, 0), 'Analyse', 'Eric Boucharé', '2E-206', 'blue'),
-        new CalendarEvent(new Date(2020, 7, 6, 16, 5), new Date(2020, 7, 6, 18, 50), 'Analyse', 'Eric Boucharé', '2E-206', 'blue'),
-        new CalendarEvent(new Date(2020, 7, 6, 14, 0), new Date(2020, 7, 6, 15, 0), 'Electronique', 'Céline Ansquer', 'D103', 'blue'),
+        new CalendarEvent(new Date(2020, 7, 6, 8, 5), new Date(2020, 7, 6, 9, 30), 'Analyse', 'Mohamed Belghiti', '2E-206', 'blue'),
+        new CalendarEvent(new Date(2020, 7, 6, 9, 40), new Date(2020, 7, 6, 11, 5), 'Electronique', 'Abdesslam Benzinou', '2E-207', 'blue'),
+        new CalendarEvent(new Date(2020, 7, 6, 11, 15), new Date(2020, 7, 6, 12, 40), 'Sciences Humaines Ingénieur', 'Delphine Toquet', '2E-211', 'blue'),
+
+        new CalendarEvent(new Date(2020, 7, 6, 14, 20), new Date(2020, 7, 6, 15, 45), 'Anglais', 'Susanna Wesson', 'B212', 'blue'),
+        new CalendarEvent(new Date(2020, 7, 6, 15, 55), new Date(2020, 7, 6, 17, 20), 'Automatisme', 'Laurent Pelt', 'D005', 'blue'),
+
+        new CalendarEvent(new Date(2020, 7, 4, 8, 5), new Date(2020, 7, 4, 11, 5), 'Conduite Projet Objet', 'Susanna Wesson', 'B212', 'blue'),
+        new CalendarEvent(new Date(2020, 7, 4, 12, 45), new Date(2020, 7, 4, 14, 10), 'Eletronique de puissance', 'Laurent Pelt', 'D005', 'blue'),
+
+
         new CalendarEvent(new Date(2020, 6, 28, 14, 30), new Date(2020, 6, 28, 16, 45), 'Analyse', 'Eric Boucharé', '2E-206', 'blue'),
         new CalendarEvent(new Date(2020, 6, 28, 8, 30), new Date(2020, 6, 28, 10, 0), 'Etude des mécanismes', 'Eric Boucharé', '2E-206', 'blue'),
         new CalendarEvent(new Date(2020, 6, 30, 16, 5), new Date(2020, 6, 30, 18, 50), 'Analyse', 'Eric Boucharé', '2E-206', 'blue'),
