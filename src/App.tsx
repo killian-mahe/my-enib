@@ -12,9 +12,8 @@ import {
   IonTabs
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { ellipse, settingsOutline, calendarOutline } from 'ionicons/icons';
+import { settingsOutline, calendarOutline } from 'ionicons/icons';
 import Agenda from './pages/Agenda';
-import Tab2 from './pages/Tab2';
 import Settings from './pages/Settings';
 import Welcome from './pages/Welcome';
 import axios, {AxiosInstance} from 'axios';
@@ -93,9 +92,6 @@ function App() {
             <Route path="/agenda" exact>
               <Agenda />
             </Route>
-            <Route path="/tab2" exact>
-              <Tab2 />
-            </Route>
             <Route path="/settings" >
               <Settings />
             </Route>
@@ -105,10 +101,6 @@ function App() {
             <IonTabButton tab="agenda" href="/agenda">
               <IonIcon icon={calendarOutline} />
               <IonLabel>Agenda</IonLabel>
-            </IonTabButton>
-            <IonTabButton tab="tab2" href="/tab2">
-              <IonIcon icon={ellipse} />
-              <IonLabel>Tab 2</IonLabel>
             </IonTabButton>
             <IonTabButton tab="settings" href="/settings">
               <IonIcon icon={settingsOutline} />
