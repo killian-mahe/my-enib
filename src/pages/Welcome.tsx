@@ -32,8 +32,7 @@ function Welcome() {
         slidesRef.current.addEventListener('ionSlidePrevStart', () => {
             buttonRef.current.classList.remove('opacity-0');
         });
-    // eslint-disable-next-line
-    }, []);
+    }, [slidesRef, buttonRef]);
 
     return (
         <IonApp>

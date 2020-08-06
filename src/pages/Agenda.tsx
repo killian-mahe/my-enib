@@ -2,9 +2,8 @@ import React, { useRef, useState } from 'react';
 import { IonContent, IonHeader, IonIcon, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import { IonSegment, IonSegmentButton } from '@ionic/react';
 import { calendarOutline } from 'ionicons/icons';
-import './Agenda.css';
-import DailyCalendar from '../components/calendar/DailyCalendar';
-import WeeklyCalendar from '../components/calendar/WeeklyCalendar';
+import DailyCalendar from '../components/calendar/dailyCalendar/DailyCalendar';
+import WeeklyCalendar from '../components/calendar/weeklyCalendar/WeeklyCalendar';
 
 function Agenda() {
 

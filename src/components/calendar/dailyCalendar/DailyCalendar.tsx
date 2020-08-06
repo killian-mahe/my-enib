@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { IonRefresher, IonRefresherContent } from '@ionic/react';
-import CalendarEvent from '../../models/CalendarEvent';
-import { apiClient } from '../../App';
-import DailyEvent from './DailyEvent';
+import CalendarEvent from '../../../models/CalendarEvent';
+import { apiClient } from '../../../App';
+import DailyEvent from './components/DailyEvent';
 import { plainToClass } from 'class-transformer';
-import EventDetail from '../../pages/EventDetail';
-import { Divider } from '../../components/Utilities';
+import EventDetail from '../../../pages/EventDetail';
+import { Divider } from '../../Utilities';
 
 interface DayliCalendarProps {
     onEventSelectedChanged?(selected: boolean): void;

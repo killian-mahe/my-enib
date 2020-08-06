@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { IonSlides } from '@ionic/react';
-import { Week } from './weeklyCalendar/components';
+import { Week } from './components/Week';
 
 interface WeeklyCalendarProps {
     className?: string;

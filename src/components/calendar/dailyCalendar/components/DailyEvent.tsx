@@ -1,6 +1,6 @@
 import React from 'react';
-import VisualTimer from './VisualTimer';
-import CalendarEvent from '../../models/CalendarEvent';
+import VisualTimer from '../../VisualTimer';
+import CalendarEvent from '../../../../models/CalendarEvent';
 
 interface DailyEventProps{
     event: CalendarEvent;
