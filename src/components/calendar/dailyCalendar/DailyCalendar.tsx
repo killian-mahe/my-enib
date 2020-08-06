@@ -5,7 +5,7 @@ import { apiClient } from '../../../App';
 import DailyEvent from './components/DailyEvent';
 import { plainToClass } from 'class-transformer';
 import EventDetail from '../../../pages/EventDetail';
-import { Divider } from '../../Utilities';
+import { Divider, _mockEvents } from '../../Utilities';
 
 interface DayliCalendarProps {
     onEventSelectedChanged?(selected: boolean): void;
@@ -22,8 +22,14 @@ function DailyCalendar(props: DayliCalendarProps) {
     const fetchData = async () => {
         const response = await apiClient.get<CalendarEvent[]>('/events')
         
-        setEvents(plainToClass(CalendarEvent, response.data).sort((a, b) => {
+        // setEvents(plainToClass(CalendarEvent, response.data).sort((a, b) => {
+        //     return a.start.getTime() - b.start.getTime();
+        // }));
+
+        setEvents(_mockEvents().sort((a, b) => {
             return a.start.getTime() - b.start.getTime();
+        }).filter((event) => {
+            return event.start.toDateString() === new Date(Date.now()).toDateString();
         }));
     }
 

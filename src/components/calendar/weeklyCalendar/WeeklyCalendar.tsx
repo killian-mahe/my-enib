@@ -4,6 +4,7 @@ import { Week } from './components/Week';
 import { apiClient } from '../../../App';
 import CalendarEvent from '../../../models/CalendarEvent';
 import { plainToClass } from 'class-transformer';
+import { _mockEvents } from '../../Utilities';
 
 interface WeeklyCalendarProps {
     className?: string;
@@ -63,7 +64,7 @@ function Slides(props: SlidesProps) {
     }, [slidesRef]);
 
     return (
-        <IonSlides className="h-3/2 w-full" ref={slidesRef}>
+        <IonSlides className="h-5/4 w-full" ref={slidesRef}>
             {
                 props.weeks?.map((week) => {
                     return <Week hours={props.hours} startDay={week} key={week.getTime()} events={props.events?.filter((event) => { return event.start.getWeek() === week.getWeek()})}/>
@@ -79,12 +80,6 @@ function _add(date: Date, days: number) : Date {
 
 function _getFirstDayOfTheWeek(date: Date) : Date{
     return new Date(_add(date, 1 - date.getDay()));
-}
-
-function _mockEvents(): CalendarEvent[] {
-    return [
-        new CalendarEvent(new Date(2020, 7, 5, 14, 30), new Date(2020, 7, 5, 15, 55), 'Analyse', 'Eric Boucharé', '2E-206', 'blue')
-    ];
 }
 
 export default WeeklyCalendar;
