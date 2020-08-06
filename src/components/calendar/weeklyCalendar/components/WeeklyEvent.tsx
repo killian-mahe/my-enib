@@ -24,9 +24,9 @@ export function WeeklyEvent({event, style, className}: WeeklyEvent) {
                     isOpen={showAlert}
                     onDidDismiss={() => setShowAlert(false)}
                     cssClass='my-custom-class'
-                    header={event.course[0].name}
+                    header={`${event.course[0].name} - ${event.course[0].classRoom}`}
                     subHeader={event.course[0].professor}
-                    message={'This is an alert message.'}
+                    message={`De ${event.start.toHourFormat()} à ${event.stop.toHourFormat()}`}
                     buttons={['OK']}
                 />
         </>
