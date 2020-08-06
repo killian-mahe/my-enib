@@ -17,7 +17,7 @@ function DailyEvent(props: DailyEventProps) {
                     <div className="grid grid-rows-2 w-full">
                         <div className="justify-between flex w-full">
                             <div className="text-gray-700 text-base">{props.event.course[0].professor}</div>
-                            <div className="text-gray-700 font-bold text-base">{props.event.start.toLocaleTimeString()}</div>
+                            <div className="text-gray-700 font-bold text-base">{props.event.start.toHourFormat()}</div>
                         </div>
                         <div className="justify-between flex w-full">
                             <div className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">{props.event.course[0].classRoom}</div>

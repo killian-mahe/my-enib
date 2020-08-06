@@ -44,9 +44,8 @@ function Row(props: RowProps) {
 function _getDuration(event: CalendarEvent | undefined) {
     if (!event) return undefined;
 
-    let duration = event.stop.getTime() - event.start.getTime();
-    duration /= (1000*60);
-    return duration > 100 ? `${Math.round((duration/60))} h` : `${Math.round(duration)} min`;
+    let duration = new Date(event.stop.getTime() - event.start.getTime());
+    return duration.getTime()/3600000 >= 1 ? `${duration.toHourFormat()}` : `${Math.round(duration.getMinutes())} min`;
 }
 
 export default EventDetail;

@@ -2,7 +2,8 @@ export {}
 
 declare global {
     interface Date {
-        getWeek: () => number;
+        getWeek(): number;
+        toHourFormat(): string;
     }
 }
 
@@ -17,4 +18,14 @@ Date.prototype.getWeek = function() {
     // Adjust to Thursday in week 1 and count number of weeks from date to week1.
     return 1 + Math.round(((date.getTime() - week1.getTime()) / 86400000
                             - 3 + (week1.getDay() + 6) % 7) / 7);
+}
+
+Date.prototype.toHourFormat = function() {
+    let hours = this.getHours();
+    let minutes = this.getMinutes();
+    if (minutes < 10) {
+        return `${hours}h0${minutes}`;
+    } else {
+        return `${hours}h${minutes}`;
+    }
 }
