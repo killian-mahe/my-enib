@@ -50,15 +50,9 @@ function DailyCalendar(props: DayliCalendarProps) {
     }
 
     return (
-        <div className={`container min-h-full bg-gray-100 background-pattern ${props.className}`}>
-            <div ref={opacityRef} className="transition-opacity duration-500 ease-in-out">
+        <div className={`container min-h-full pb-5 bg-gray-100 background-pattern ${props.className}`}>
+            <div ref={opacityRef} className="transition-opacity duration-500 ease-in-out h-full">
                 {(!events) ? <div className="flex h-full items-center justify-center text-lg font-sans font-light text-blue-900">Chargement de l'agenda...</div> : <div></div>}
-                <Divider className="sticky top-0 bg-gray-100 py-1" label="Cours passés"/>
-                {
-                    passedEvents?.map((event) => {
-                        return <div className="my-3 mx-5 shadow-md" onClick={() => handleOnEventClick(event.id)} key={event.id}><DailyEvent event={event}/></div>
-                    })
-                }
                 <Divider className="sticky top-0 bg-gray-100 py-1" label="Actuellement"/>
                 {
                     currentEvents?.map((event) => {
@@ -68,6 +62,12 @@ function DailyCalendar(props: DayliCalendarProps) {
                 <Divider className="sticky top-0 bg-gray-100 py-1" label="Prochain cours"/>
                 {
                     nextEvents?.map((event) => {
+                        return <div className="my-3 mx-5 shadow-md" onClick={() => handleOnEventClick(event.id)} key={event.id}><DailyEvent event={event}/></div>
+                    })
+                }
+                <Divider className="sticky top-0 bg-gray-100 py-1" label="Cours passés"/>
+                {
+                    passedEvents?.map((event) => {
                         return <div className="my-3 mx-5 shadow-md" onClick={() => handleOnEventClick(event.id)} key={event.id}><DailyEvent event={event}/></div>
                     })
                 }
