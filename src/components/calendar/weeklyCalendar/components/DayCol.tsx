@@ -1,11 +1,13 @@
 import React from 'react';
+import CalendarEvent from '../../../../models/CalendarEvent';
 
 interface DayProps {
     hours: number;
     className?: string;
+    events?: CalendarEvent[];
 }
 
-export function DayCol({hours, className}: DayProps) {
+export function DayCol({hours, className, events}: DayProps) {
 
     const hoursMap = [] as number[];
     for (let index = 1; index <= hours; index++) {

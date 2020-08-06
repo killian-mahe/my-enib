@@ -1,6 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { IonSlides } from '@ionic/react';
 import { Week } from './components/Week';
+import { apiClient } from '../../../App';
+import CalendarEvent from '../../../models/CalendarEvent';
+import { plainToClass } from 'class-transformer';
 
 interface WeeklyCalendarProps {
     className?: string;
@@ -9,6 +12,7 @@ interface WeeklyCalendarProps {
 interface SlidesProps {
     hours: number[];
     weeks: Date[];
+    events?: CalendarEvent[];
 }
 
 function WeeklyCalendar(props: WeeklyCalendarProps) {
@@ -17,6 +21,20 @@ function WeeklyCalendar(props: WeeklyCalendarProps) {
 
     const hours = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
 
+    const [events, setEvents] = useState<CalendarEvent[]>();
+
+    const fetchData = async () => {
+        const response = await apiClient.get<CalendarEvent[]>('/events')
+        
+        // setEvents(plainToClass(CalendarEvent, response.data).sort((a, b) => {
+        //     return a.start.getTime() - b.start.getTime();
+        // }));
+
+        setEvents(_mockEvents().sort((a, b) => {
+            return a.start.getTime() - b.start.getTime();
+        }));
+    }
+
     useEffect(() => {
         const now = new Date(Date.now());
         let tempWeeks: Date[] = [];
@@ -24,11 +42,12 @@ function WeeklyCalendar(props: WeeklyCalendarProps) {
             tempWeeks.push(_getFirstDayOfTheWeek(_add(now, week*7)));
         }
         setWeeks(tempWeeks);
+        fetchData();
     }, []);
 
     return (
         <div className={`container h-full ${props.className}`}>
-            {weeks ? <Slides hours={hours} weeks={weeks}/> : <></>}
+            {weeks ? <Slides hours={hours} weeks={weeks} events={events}/> : <></>}
         </div>
     );
 }
@@ -47,7 +66,7 @@ function Slides(props: SlidesProps) {
         <IonSlides className="h-3/2 w-full" ref={slidesRef}>
             {
                 props.weeks?.map((week) => {
-                    return <Week hours={props.hours} startDay={week} key={week.getTime()}/>
+                    return <Week hours={props.hours} startDay={week} key={week.getTime()} events={props.events?.filter((event) => { return event.start.getWeek() === week.getWeek()})}/>
                 })
             }
         </IonSlides>
@@ -60,6 +79,12 @@ function _add(date: Date, days: number) : Date {
 
 function _getFirstDayOfTheWeek(date: Date) : Date{
     return new Date(_add(date, 1 - date.getDay()));
+}
+
+function _mockEvents(): CalendarEvent[] {
+    return [
+        new CalendarEvent(new Date(2020, 7, 5, 14, 30), new Date(2020, 7, 5, 15, 55), 'Analyse', 'Eric Boucharé', '2E-206', 'blue')
+    ];
 }
 
 export default WeeklyCalendar;

@@ -3,13 +3,15 @@ import { IonSlide } from '@ionic/react';
 import { DayCol } from './DayCol';
 import { HourRow } from './HourRow';
 import { DayHeader } from './DayHeader';
+import CalendarEvent from '../../../../models/CalendarEvent';
 
 interface WeekProps {
     hours: number[];
     startDay: Date;
+    events?: CalendarEvent[];
 }
 
-export function Week({hours, startDay}: WeekProps) {
+export function Week({hours, startDay, events}: WeekProps) {
 
     let days: Date[] = [];
 
@@ -38,7 +40,7 @@ export function Week({hours, startDay}: WeekProps) {
                     <div className="flex h-full w-6/7">
                         {
                             days.map((day) => {
-                                return <DayCol hours={hours.length} className="flex-1" key={day.getTime()}/>
+                                return <DayCol hours={hours.length} className="flex-1" key={day.getTime()} events={events?.filter((event) => { return event.start.getDay() === day.getDay()})}/>
                             })
                         }
                     </div>
