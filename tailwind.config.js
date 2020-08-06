@@ -29,6 +29,11 @@ module.exports = {
         'half': '50%',
         '3/4': '75%',
         'full': '100%'
+      },
+      fontSize: {
+        '2xs': '.625rem',
+        '3xs': '.5rem',
+        '4xs': '.375rem'
       }
     },
   },
