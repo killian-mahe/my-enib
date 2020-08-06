@@ -25,7 +25,7 @@ export function Week({hours, startDay, events}: WeekProps) {
                     <div className="w-1/7" />
                     {
                         days.map((day) => {
-                            return <DayHeader day={day}/>
+                            return <DayHeader day={day} key={day.getTime()}/>
                         })
                     }
                 </div>

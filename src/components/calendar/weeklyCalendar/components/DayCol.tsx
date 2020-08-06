@@ -24,7 +24,7 @@ export function DayCol({hours, className, events}: DayProps) {
             }
             {
                 events?.map((event) => {
-                    return <WeeklyEvent event={event} style={{'position': 'absolute', 'top': _getPosition(event, hoursMap), 'height': _getHeight(event, hoursMap)}}/>
+                    return <WeeklyEvent event={event} style={{'position': 'absolute', 'top': _getPosition(event, hoursMap), 'height': _getHeight(event, hoursMap)}} key={event.id}/>
                 })
             }
         </div>
