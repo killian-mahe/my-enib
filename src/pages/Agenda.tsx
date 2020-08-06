@@ -5,7 +5,7 @@ import { calendarOutline } from 'ionicons/icons';
 import DailyCalendar from '../components/calendar/dailyCalendar/DailyCalendar';
 import WeeklyCalendar from '../components/calendar/weeklyCalendar/WeeklyCalendar';
 import CalendarEvent from '../models/CalendarEvent';
-import { apiClient } from '../App';
+// import { apiClient } from '../App';
 import { _mockEvents } from '../components/Utilities';
 
 function Agenda() {
@@ -16,7 +16,7 @@ function Agenda() {
 
   const fetchData = async () => {
     console.log("fetching data");
-      const response = await apiClient.get<CalendarEvent[]>('/events')
+      // const response = await apiClient.get<CalendarEvent[]>('/events')
       
       // setEvents(plainToClass(CalendarEvent, response.data).sort((a, b) => {
       //     return a.start.getTime() - b.start.getTime();

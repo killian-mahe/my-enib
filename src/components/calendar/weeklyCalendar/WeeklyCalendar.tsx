@@ -1,10 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { IonSlides } from '@ionic/react';
 import { Week } from './components/Week';
-import { apiClient } from '../../../App';
+// import { apiClient } from '../../../App';
 import CalendarEvent from '../../../models/CalendarEvent';
-import { plainToClass } from 'class-transformer';
-import { _mockEvents } from '../../Utilities';
+// import { plainToClass } from 'class-transformer';
 
 interface WeeklyCalendarProps {
     className?: string;
