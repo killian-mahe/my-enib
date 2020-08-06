@@ -52,9 +52,6 @@ function DailyCalendar(props: DayliCalendarProps) {
 
     return (
         <div className={`container min-h-full bg-gray-100 background-pattern ${props.className}`}>
-            {/* <IonRefresher className="z-10" slot="fixed" onIonRefresh={(event) => fetchData().then(() => event.detail.complete())}>
-                <IonRefresherContent refreshingSpinner="circles"></IonRefresherContent>
-            </IonRefresher> */}
             <div ref={opacityRef} className="transition-opacity duration-500 ease-in-out">
                 {(!events) ? <div className="flex h-full items-center justify-center text-lg font-sans font-light text-blue-900">Chargement de l'agenda...</div> : <div></div>}
                 <Divider className="sticky top-0 bg-gray-100 py-1" label="Cours passés"/>

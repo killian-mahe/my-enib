@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { IonContent, IonHeader, IonIcon, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonContent, IonHeader, IonIcon, IonPage, IonTitle, IonToolbar, IonSpinner, IonRefresher, IonRefresherContent } from '@ionic/react';
 import { IonSegment, IonSegmentButton } from '@ionic/react';
 import { calendarOutline } from 'ionicons/icons';
 import DailyCalendar from '../components/calendar/dailyCalendar/DailyCalendar';
@@ -55,8 +55,11 @@ function Agenda() {
             <IonSegmentButton value="weekly">Semaine</IonSegmentButton>
           </IonSegment>
         </IonToolbar>
+        <IonRefresher className="z-10" slot="fixed" onIonRefresh={(event) => fetchData().then(() => event.detail.complete())}>
+            <IonRefresherContent refreshingSpinner="circles"></IonRefresherContent>
+        </IonRefresher>
           {
-            events ? <><DailyCalendar onEventSelectedChanged={handleOnEventSelectedChanged} className={selectedSegment === "daily" ? '' : 'hidden'} events={events}/> <WeeklyCalendar className={selectedSegment === "weekly" ? '' : 'hidden'} events={events}/></>: <></>
+            events ? <><DailyCalendar onEventSelectedChanged={handleOnEventSelectedChanged} className={selectedSegment === "daily" ? '' : 'hidden'} events={events}/> <WeeklyCalendar className={selectedSegment === "weekly" ? '' : 'hidden'} events={events}/></> : <div className="flex h-full items-center justify-center"><IonSpinner className="transform scale-150" name="crescent" /></div>
           }
       </IonContent>
     </IonPage>
