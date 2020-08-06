@@ -25,7 +25,7 @@ function WeeklyCalendar(props: WeeklyCalendarProps) {
     useEffect(() => {
         const now = new Date(Date.now());
         let tempWeeks: Date[] = [];
-        for (let week = -7; week <= 7; week++) {
+        for (let week = -2; week <= 7; week++) {
             tempWeeks.push(_getFirstDayOfTheWeek(_add(now, week*7)));
         }
         setWeeks(tempWeeks);
@@ -44,7 +44,7 @@ function Slides(props: SlidesProps) {
 
     useEffect(() => {
         slidesRef.current?.length().then((length) => {
-            slidesRef.current.slideTo(length / 2, 0);
+            slidesRef.current.slideTo(2, 0);
         })
     }, [slidesRef]);
 
