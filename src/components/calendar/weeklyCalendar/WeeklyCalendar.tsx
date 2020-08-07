@@ -41,16 +41,16 @@ function WeeklyCalendar(props: WeeklyCalendarProps) {
     );
 }
 
+const slideOpts = {
+    initialSlide: 2
+  };
+
 function Slides(props: SlidesProps) {
 
     const slidesRef = useRef() as React.MutableRefObject<HTMLIonSlidesElement>;
 
-    useEffect(() => {
-            slidesRef.current.slideTo(2, 0);
-    }, [slidesRef]);
-
     return (
-        <IonSlides className="w-full weekly-calendar" ref={slidesRef}>
+        <IonSlides className="w-full weekly-calendar" options={slideOpts} ref={slidesRef}>
             {
                 props.weeks?.map((week) => {
                     return <Week hours={props.hours} key={week} week={week} events={props.events?.filter((event) => { return event.start.getWeek() === week})}/>
