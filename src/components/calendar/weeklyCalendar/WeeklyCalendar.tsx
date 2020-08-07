@@ -1,7 +1,7 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useMemo } from 'react';
 import { IonSlides } from '@ionic/react';
-import { Week } from './components/Week';
-// import { apiClient } from '../../../App';
+import Week from './components/Week';
+import { now } from '../../../App';
 import CalendarEvent from '../../../models/CalendarEvent';
 // import { plainToClass } from 'class-transformer';
 
@@ -12,24 +12,27 @@ interface WeeklyCalendarProps {
 
 interface SlidesProps {
     hours: number[];
-    weeks: Date[];
+    weeks: number[];
     events?: CalendarEvent[];
 }
 
 function WeeklyCalendar(props: WeeklyCalendarProps) {
 
-    const [weeks, setWeeks] = useState<Date[]>();
-
     const hours = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
 
-    useEffect(() => {
-        const now = new Date(Date.now());
-        let tempWeeks: Date[] = [];
-        for (let week = -2; week <= 7; week++) {
-            tempWeeks.push(_getFirstDayOfTheWeek(_add(now, week*7)));
+    const currentWeek = now.getWeek();
+    
+    const getListOfWeeks = (currentWeek: number) => {
+        let weeks: number[] = [];
+        for (let weekIndex = -2; weekIndex <= 7; weekIndex++) {
+            weeks.push(currentWeek + weekIndex);
         }
-        setWeeks(tempWeeks);
-    }, []);
+        return weeks;
+    }
+
+    const weeks = useMemo(() => getListOfWeeks(currentWeek), [currentWeek]);
+
+    console.log("Rendering WeeklyCalendar");
 
     return (
         <div className={`container h-full ${props.className}`}>
@@ -43,28 +46,18 @@ function Slides(props: SlidesProps) {
     const slidesRef = useRef() as React.MutableRefObject<HTMLIonSlidesElement>;
 
     useEffect(() => {
-        slidesRef.current?.length().then((length) => {
             slidesRef.current.slideTo(2, 0);
-        })
     }, [slidesRef]);
 
     return (
         <IonSlides className="w-full weekly-calendar" ref={slidesRef}>
             {
                 props.weeks?.map((week) => {
-                    return <Week hours={props.hours} startDay={week} key={week.getTime()} events={props.events?.filter((event) => { return event.start.getWeek() === week.getWeek()})}/>
+                    return <Week hours={props.hours} key={week} week={week} events={props.events?.filter((event) => { return event.start.getWeek() === week})}/>
                 })
             }
         </IonSlides>
     );
 }
 
-function _add(date: Date, days: number) : Date {
-    return new Date(date.getTime() + days*24*60*60*1000);
-}
-
-function _getFirstDayOfTheWeek(date: Date) : Date{
-    return new Date(_add(date, 1 - date.getDay()));
-}
-
-export default WeeklyCalendar;
+export default React.memo(WeeklyCalendar);

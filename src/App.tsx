@@ -13,10 +13,13 @@ import {
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { settingsOutline, calendarOutline } from 'ionicons/icons';
+import axios, {AxiosInstance} from 'axios';
+// import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
+
+/* Local Components */
 import Agenda from './pages/Agenda';
 import Settings from './pages/Settings';
 import Welcome from './pages/Welcome';
-import axios, {AxiosInstance} from 'axios';
 
 /* Firebase imports */
 import firebase from 'firebase/app';
@@ -49,6 +52,8 @@ export const apiClient: AxiosInstance = axios.create({
     'Content-Type': 'application/json'
   }
 });
+
+export const now: Date = new Date(Date.now() - 24*60*60*1000);
 
 function App() {
   

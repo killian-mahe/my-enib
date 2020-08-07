@@ -5,7 +5,7 @@ interface HourRowProps {
     className?: string;
 }
 
-export function HourRow({label, className} : HourRowProps) {
+function HourRow({label, className} : HourRowProps) {
 
     return (
         <div className={`relative flex justify-center items-center ${className}`}>
@@ -13,3 +13,5 @@ export function HourRow({label, className} : HourRowProps) {
         </div>
     );
 }
+
+export default React.memo(HourRow);

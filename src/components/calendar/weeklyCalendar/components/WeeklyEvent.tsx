@@ -8,7 +8,7 @@ interface WeeklyEvent {
     className?: string;
 }
 
-export function WeeklyEvent({event, style, className}: WeeklyEvent) {
+function WeeklyEvent({event, style, className}: WeeklyEvent) {
 
     const [showAlert, setShowAlert] = useState(false);
 
@@ -47,3 +47,5 @@ function _getAbbrName(name: string): string {
 
     return abbrName;
 }
+
+export default React.memo(WeeklyEvent);

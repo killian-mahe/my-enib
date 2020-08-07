@@ -27,9 +27,6 @@ function Agenda() {
       }));
   }
 
-  const handleOnEventSelectedChanged = () => {
-    contentRef.current?.classList.toggle('overflow-hidden-force');
-  }
 
   const handleOnChange = (event: any) => {
     setSelectedSegment(event.detail.value);
@@ -59,7 +56,7 @@ function Agenda() {
             <IonRefresherContent refreshingSpinner="circles"></IonRefresherContent>
         </IonRefresher>
           {
-            events ? <><DailyCalendar onEventSelectedChanged={handleOnEventSelectedChanged} className={selectedSegment === "daily" ? '' : 'hidden'} events={events}/> <WeeklyCalendar className={selectedSegment === "weekly" ? '' : 'hidden'} events={events}/></> : <div className="flex h-full items-center justify-center"><IonSpinner className="transform scale-150" name="crescent" /></div>
+            events ? <><span className={selectedSegment === "daily" ? '' : 'hidden'}><DailyCalendar events={events}/></span> <span className={selectedSegment === "weekly" ? '' : 'hidden'}><WeeklyCalendar events={events}/></span></> : <div className="flex h-full items-center justify-center"><IonSpinner className="transform scale-150" name="crescent" /></div>
           }
       </IonContent>
     </IonPage>

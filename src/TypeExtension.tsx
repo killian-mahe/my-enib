@@ -4,6 +4,12 @@ declare global {
     interface Date {
         getWeek(): number;
         toHourFormat(): string;
+        add(days?: number, hours?: number, minutes?: number): Date;
+        sameDay(date: Date) : boolean;
+    }
+
+    interface DateConstructor {
+        getDateOfISOWeek(week: number, year: number): Date;
     }
 }
 
@@ -28,4 +34,24 @@ Date.prototype.toHourFormat = function() {
     } else {
         return `${hours}h${minutes}`;
     }
+}
+// eslint-disable-next-line
+Date.prototype.add = function (days: number = 0, hours: number = 0, minutes: number = 0) : Date {
+    const timestampToAdd = ((days*24 + hours)*60 + minutes)*60*1000;
+    return new Date(this.getTime() + timestampToAdd);
+}
+// eslint-disable-next-line
+Date.prototype.sameDay = function (date: Date) : boolean {
+    return this.getMonth() === date.getMonth() && this.getDate() === date.getDate();
+}
+
+Date.getDateOfISOWeek = function (week: number, year: number) : Date{
+    var simple = new Date(year, 0, 1 + (week - 1) * 7);
+    var dow = simple.getDay();
+    var ISOweekStart = simple;
+    if (dow <= 4)
+        ISOweekStart.setDate(simple.getDate() - simple.getDay() + 1);
+    else
+        ISOweekStart.setDate(simple.getDate() + 8 - simple.getDay());
+    return ISOweekStart;
 }

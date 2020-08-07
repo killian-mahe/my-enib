@@ -1,4 +1,5 @@
 import React from 'react';
+import { now } from '../../App';
 
 interface VisualTimerProps {
     start: number;
@@ -19,7 +20,7 @@ function VisualTimer(props: VisualTimerProps) {
 
 function _getWaitTime(start: number, stop: number) {
     let duration: number = (stop - start)/(1000 * 60);
-    let pendingTime = (start - Date.now())/(1000 * 60);
+    let pendingTime = (start - now.getTime())/(1000 * 60);
     
     pendingTime = Math.round(pendingTime);
     if (pendingTime < 0) {
@@ -33,4 +34,4 @@ function _getWaitTime(start: number, stop: number) {
     }
 }
 
-export default VisualTimer;
+export default React.memo(VisualTimer);

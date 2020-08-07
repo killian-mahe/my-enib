@@ -1,6 +1,6 @@
 import React from 'react';
 import CalendarEvent from '../../../../models/CalendarEvent';
-import { WeeklyEvent } from './WeeklyEvent';
+import WeeklyEvent from './WeeklyEvent';
 
 interface DayProps {
     hours: number;
@@ -8,7 +8,7 @@ interface DayProps {
     events?: CalendarEvent[];
 }
 
-export function DayCol({hours, className, events}: DayProps) {
+function DayCol({hours, className, events}: DayProps) {
 
     const hoursMap = [] as number[];
     for (let index = 1; index <= hours; index++) {
@@ -43,3 +43,5 @@ function _getHeight(event: CalendarEvent, hours: number[]): string {
     let percent = period * 100 / (hours.length*60);
     return `${percent}%`;
 }
+
+export default React.memo(DayCol);

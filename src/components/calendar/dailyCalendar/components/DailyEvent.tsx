@@ -29,4 +29,4 @@ function DailyEvent(props: DailyEventProps) {
     );
 }
 
-export default DailyEvent;
+export default React.memo(DailyEvent);

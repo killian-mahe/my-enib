@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import CalendarEvent from '../../../models/CalendarEvent';
-// import { apiClient } from '../../../App';
+import { now } from '../../../App';
 import DailyEvent from './components/DailyEvent';
 // import { plainToClass } from 'class-transformer';
 import EventDetail from '../../../pages/EventDetail';
@@ -18,12 +18,12 @@ function DailyCalendar(props: DayliCalendarProps) {
     const detailRef = useRef() as React.MutableRefObject<HTMLDivElement>;
     const opacityRef = useRef() as React.MutableRefObject<HTMLDivElement>;
     let events = props.events?.filter((event) => {
-        return event.start.toDateString() === new Date(Date.now()).toDateString();
+        return event.start.toDateString() === now.toDateString();
     })
 
-    let passedEvents = events?.filter((event: CalendarEvent) => {return event.stop.getTime() < Date.now() ? true : false;})
-    let currentEvents = events?.filter((event: CalendarEvent) => {return event.start.getTime() < Date.now() && event.stop.getTime() > Date.now() ? true : false;})
-    let nextEvents = events?.filter((event: CalendarEvent) => {return event.start.getTime() > Date.now() ? true : false;})
+    let passedEvents = events?.filter((event: CalendarEvent) => {return event.stop.getTime() < now.getTime() ? true : false;})
+    let currentEvents = events?.filter((event: CalendarEvent) => {return event.start.getTime() < now.getTime() && event.stop.getTime() > now.getTime() ? true : false;})
+    let nextEvents = events?.filter((event: CalendarEvent) => {return event.start.getTime() > now.getTime() ? true : false;})
 
     const loadEvent = async (eventId : number) => {
         const event = events?.find((event) => {
@@ -48,6 +48,8 @@ function DailyCalendar(props: DayliCalendarProps) {
     const handleOnEventClick = (eventId: number) => {
         if (!detailEvent) loadEvent(eventId);
     }
+
+    console.log("Rendering DailyCalendar");
 
     return (
         <div className={`container min-h-full pb-5 bg-gray-100 background-pattern ${props.className}`}>
@@ -79,4 +81,4 @@ function DailyCalendar(props: DayliCalendarProps) {
     );
 };
 
-export default DailyCalendar;
+export default React.memo(DailyCalendar);

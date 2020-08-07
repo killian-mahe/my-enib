@@ -1,23 +1,31 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { IonSlide } from '@ionic/react';
-import { DayCol } from './DayCol';
-import { HourRow } from './HourRow';
-import { DayHeader } from './DayHeader';
+import DayCol from './DayCol';
+import HourRow from './HourRow';
+import DayHeader from './DayHeader';
 import CalendarEvent from '../../../../models/CalendarEvent';
+import { now } from '../../../../App';
 
 interface WeekProps {
     hours: number[];
-    startDay: Date;
+    week: number;
     events?: CalendarEvent[];
 }
 
-export function Week({hours, startDay, events}: WeekProps) {
+function Week({hours, week, events}: WeekProps) {
 
-    let days: Date[] = [];
-
-    for (let index = 0; index < 6; index++) {
-        days.push(_add(startDay, index));
+    console.log("Rendering Week");
+    
+    const computeDays = (week: number) => {
+        let days: Date[] = [];
+        const currentYear = now.getFullYear();
+        for (let index = 0; index < 6; index++) {
+            days.push(Date.getDateOfISOWeek(week, currentYear).add(index));
+        }
+        return days;
     }
+    
+    const days = useMemo(() => computeDays(week), [week]);
 
     return (
         <IonSlide className="flex flex-col">
@@ -25,7 +33,7 @@ export function Week({hours, startDay, events}: WeekProps) {
                     <div className="w-1/7" />
                     {
                         days.map((day) => {
-                            return <DayHeader day={day} key={day.getTime()}/>
+                            return <DayHeader day={day} key={day.getDay()}/>
                         })
                     }
                 </div>
@@ -40,7 +48,7 @@ export function Week({hours, startDay, events}: WeekProps) {
                     <div className="flex h-full w-6/7">
                         {
                             days.map((day) => {
-                                return <DayCol hours={hours.length} className="flex-1" key={day.getTime()} events={events?.filter((event) => { return event.start.getDay() === day.getDay()})}/>
+                                return <DayCol hours={hours.length} className="flex-1" key={day.getDay()} events={events?.filter((event) => { return event.start.getDay() === day.getDay()})}/>
                             })
                         }
                     </div>
@@ -49,6 +57,4 @@ export function Week({hours, startDay, events}: WeekProps) {
     );
 }
 
-function _add(date: Date, days: number) : Date {
-    return new Date(date.getTime() + days*24*60*60*1000);
-}
+export default React.memo(Week);
