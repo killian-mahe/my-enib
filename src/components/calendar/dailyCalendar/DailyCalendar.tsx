@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import CalendarEvent from '../../../models/CalendarEvent';
 import { now } from '../../../App';
-import DailyEvent from './components/DailyEvent';
+import DailyEvent, { EventState } from './components/DailyEvent';
 // import { plainToClass } from 'class-transformer';
 import EventDetail from '../../../pages/EventDetail';
 import { Divider } from '../../Utilities';
@@ -13,17 +13,23 @@ interface DayliCalendarProps {
 }
 
 function DailyCalendar(props: DayliCalendarProps) {
-
-    const [detailEvent, setDetailEvent] = useState<CalendarEvent>();
-    const detailRef = useRef() as React.MutableRefObject<HTMLDivElement>;
-    const opacityRef = useRef() as React.MutableRefObject<HTMLDivElement>;
+    
     let events = props.events?.filter((event) => {
         return event.start.toDateString() === now.toDateString();
     })
+    const detailRef = useRef() as React.MutableRefObject<HTMLDivElement>;
+    const opacityRef = useRef() as React.MutableRefObject<HTMLDivElement>;
 
-    let passedEvents = events?.filter((event: CalendarEvent) => {return event.stop.getTime() < now.getTime() ? true : false;})
-    let currentEvents = events?.filter((event: CalendarEvent) => {return event.start.getTime() < now.getTime() && event.stop.getTime() > now.getTime() ? true : false;})
-    let nextEvents = events?.filter((event: CalendarEvent) => {return event.start.getTime() > now.getTime() ? true : false;})
+    const [detailEvent, setDetailEvent] = useState<CalendarEvent>();
+    const [passedEvents, setPassedEvents] = useState<CalendarEvent[]>(events?.filter((event: CalendarEvent) => {return event.stop.getTime() < now.getTime() ? true : false;}));
+    const [currentEvents, setCurrentEvents] = useState<CalendarEvent[]>(events?.filter((event: CalendarEvent) => {return event.start.getTime() < now.getTime() && event.stop.getTime() > now.getTime() ? true : false;}));
+    const [nextEvents, setNextEvents] = useState<CalendarEvent[]>(events?.filter((event: CalendarEvent) => {return event.start.getTime() > now.getTime() ? true : false;}));
+    
+    const reloadEvents = function() {
+        setPassedEvents(events?.filter((event: CalendarEvent) => {return event.stop.getTime() < Date.now() ? true : false;}));
+        setCurrentEvents(events?.filter((event: CalendarEvent) => {return event.start.getTime() < Date.now() && event.stop.getTime() > Date.now() ? true : false;}));
+        setNextEvents(events?.filter((event: CalendarEvent) => {return event.start.getTime() > Date.now() ? true : false;}));
+    }
 
     const loadEvent = async (eventId : number) => {
         const event = events?.find((event) => {
@@ -58,19 +64,19 @@ function DailyCalendar(props: DayliCalendarProps) {
                 <Divider className="sticky top-0 bg-gray-100 py-1" label="Actuellement"/>
                 {
                     currentEvents?.map((event) => {
-                        return <div className="my-3 mx-5 shadow-md" onClick={() => handleOnEventClick(event.id)} key={event.id}><DailyEvent event={event}/></div>
+                        return <div className="my-3 mx-5 shadow-md" onClick={() => handleOnEventClick(event.id)} key={event.id}><DailyEvent event={event} state={EventState.now} onStateChanged={reloadEvents}/></div>
                     })
                 }
                 <Divider className="sticky top-0 bg-gray-100 py-1" label="Prochain cours"/>
                 {
                     nextEvents?.map((event) => {
-                        return <div className="my-3 mx-5 shadow-md" onClick={() => handleOnEventClick(event.id)} key={event.id}><DailyEvent event={event}/></div>
+                        return <div className="my-3 mx-5 shadow-md" onClick={() => handleOnEventClick(event.id)} key={event.id}><DailyEvent event={event} state={EventState.next} onStateChanged={reloadEvents}/></div>
                     })
                 }
                 <Divider className="sticky top-0 bg-gray-100 py-1" label="Cours passés"/>
                 {
                     passedEvents?.map((event) => {
-                        return <div className="my-3 mx-5 shadow-md" onClick={() => handleOnEventClick(event.id)} key={event.id}><DailyEvent event={event}/></div>
+                        return <div className="my-3 mx-5 shadow-md" onClick={() => handleOnEventClick(event.id)} key={event.id}><DailyEvent event={event} state={EventState.passed} onStateChanged={reloadEvents}/></div>
                     })
                 }
             </div>

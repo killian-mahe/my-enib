@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useMemo } from 'react';
+import React, { useRef, useMemo } from 'react';
 import { IonSlides } from '@ionic/react';
 import Week from './components/Week';
 import { now } from '../../../App';

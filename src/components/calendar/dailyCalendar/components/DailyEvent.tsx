@@ -4,9 +4,18 @@ import CalendarEvent from '../../../../models/CalendarEvent';
 
 interface DailyEventProps{
     event: CalendarEvent;
+    state: EventState;
+    onStateChanged(): void;
+}
+
+export enum EventState {
+    passed,
+    now,
+    next
 }
 
 function DailyEvent(props: DailyEventProps) {
+
     return (
             <div className="rounded overflow-hidden bg-white w-full">
                 <div className="px-3 py-2">
@@ -21,7 +30,7 @@ function DailyEvent(props: DailyEventProps) {
                         </div>
                         <div className="justify-between flex w-full">
                             <div className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">{props.event.course[0].classRoom}</div>
-                            <VisualTimer start={props.event.start.getTime()} stop={props.event.stop.getTime()} />
+                            <VisualTimer start={props.event.start.getTime()} stop={props.event.stop.getTime()} state={props.state} onStateChanged={props.onStateChanged}/>
                         </div>
                     </div>
                 </div>

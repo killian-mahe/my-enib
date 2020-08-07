@@ -12,13 +12,13 @@ export function Divider (props: DividerProps) {
 
 export function _mockEvents(): CalendarEvent[] {
     return [
-        new CalendarEvent(new Date(2020, 7, 6, 8, 5), new Date(2020, 7, 6, 9, 30), 'Analyse', 'Mohamed Belghiti', '2E-206', 'blue'),
-        new CalendarEvent(new Date(2020, 7, 6, 9, 40), new Date(2020, 7, 6, 11, 5), 'Electronique', 'Abdesslam Benzinou', '2E-207', 'blue'),
-        new CalendarEvent(new Date(2020, 7, 6, 11, 15), new Date(2020, 7, 6, 12, 40), 'Sciences Humaines Ingénieur', 'Delphine Toquet', '2E-211', 'blue'),
+        new CalendarEvent(new Date(2020, 7, 7, 8, 5), new Date(2020, 7, 7, 9, 30), 'Analyse', 'Mohamed Belghiti', '2E-206', 'blue'),
+        new CalendarEvent(new Date(2020, 7, 7, 9, 40), new Date(2020, 7, 7, 11, 5), 'Electronique', 'Abdesslam Benzinou', '2E-207', 'blue'),
+        new CalendarEvent(new Date(2020, 7, 7, 11, 15), new Date(2020, 7, 7, 12, 40), 'Sciences Humaines Ingénieur', 'Delphine Toquet', '2E-211', 'blue'),
 
-        new CalendarEvent(new Date(2020, 7, 6, 14, 20), new Date(2020, 7, 6, 15, 45), 'Anglais', 'Susanna Wesson', 'B212', 'blue'),
-        new CalendarEvent(new Date(2020, 7, 6, 15, 55), new Date(2020, 7, 6, 17, 20), 'Automatisme', 'Laurent Pelt', 'D005', 'blue'),
-        new CalendarEvent(new Date(2020, 7, 6, 17, 30), new Date(2020, 7, 6, 18, 55), 'Chinois', 'Xi Jinping', 'B210', 'blue'),
+        new CalendarEvent(new Date(2020, 7, 7, 15, 30), new Date(2020, 7, 7, 15, 45), 'Anglais', 'Susanna Wesson', 'B212', 'blue'),
+        new CalendarEvent(new Date(2020, 7, 7, 16, 7), new Date(2020, 7, 7, 17, 20), 'Automatisme', 'Laurent Pelt', 'D005', 'blue'),
+        new CalendarEvent(new Date(2020, 7, 7, 17, 30), new Date(2020, 7, 7, 18, 55), 'Chinois', 'Xi Jinping', 'B210', 'blue'),
 
         new CalendarEvent(new Date(2020, 7, 4, 8, 5), new Date(2020, 7, 4, 11, 5), 'Conduite Projet Objet', 'Susanna Wesson', 'B212', 'blue'),
         new CalendarEvent(new Date(2020, 7, 4, 12, 45), new Date(2020, 7, 4, 14, 10), 'Eletronique de puissance', 'Laurent Pelt', 'D005', 'blue'),

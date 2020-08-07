@@ -53,7 +53,11 @@ export const apiClient: AxiosInstance = axios.create({
   }
 });
 
-export const now: Date = new Date(Date.now() - 24*60*60*1000);
+export let now: Date = new Date(Date.now());
+
+setInterval(() => {
+  now = new Date(Date.now())
+}, 60000);
 
 function App() {
   
