@@ -48,7 +48,7 @@ function Week({hours, week, events}: WeekProps) {
                     <div className="flex h-full w-6/7">
                         {
                             days.map((day) => {
-                                return <DayCol hours={hours.length} className="flex-1" key={day.getDay()} events={events?.filter((event) => { return event.start.getDay() === day.getDay()})}/>
+                                return <DayCol hours={hours.length} className="flex-1" key={day.getDay()} day={day} events={events?.filter((event) => { return event.start.getDay() === day.getDay()})}/>
                             })
                         }
                     </div>

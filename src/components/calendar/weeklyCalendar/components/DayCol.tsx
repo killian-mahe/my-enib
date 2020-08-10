@@ -4,19 +4,29 @@ import WeeklyEvent from './WeeklyEvent';
 
 interface DayProps {
     hours: number;
+    day: Date;
     className?: string;
     events?: CalendarEvent[];
 }
 
-function DayCol({hours, className, events}: DayProps) {
+function DayCol({hours, day, className, events}: DayProps) {
 
     const hoursMap = [] as number[];
     for (let index = 1; index <= hours; index++) {
         hoursMap.push(index);
     }
 
+    const visualIndicator = () => {
+        if (day.sameDay(new Date(Date.now()))) {
+            return (
+                <div className="w-full border-red-700 border border-solid z-10" style={{'position': 'absolute', 'top': _getPositionFromDate(new Date(Date.now()), hoursMap)}}></div>
+            );
+        }
+    }
+
     return (
         <div className={`h-full flex flex-col relative ${className}`}>
+            {visualIndicator()}
             {
                 hoursMap.map((hour) => {
                     return <div className="flex-1 w-full border-l border-t border-solid border-gray-200" key={hour}><div className="w-full h-half border-b border-solid border-gray-100"/></div>
@@ -33,6 +43,12 @@ function DayCol({hours, className, events}: DayProps) {
 
 function _getPosition(event: CalendarEvent, hours: number[]) : string {
     const start = new Date(event.start.getTime() - 8*60*60*1000);
+    let percent = (start.getHours()*60 + start.getMinutes()) * 100 / (hours.length*60);
+    return `${percent}%`;
+}
+
+function _getPositionFromDate(date: Date, hours: number[]) : string {
+    const start = new Date(date.getTime() - 8*60*60*1000);
     let percent = (start.getHours()*60 + start.getMinutes()) * 100 / (hours.length*60);
     return `${percent}%`;
 }
