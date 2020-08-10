@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useMemo, useEffect } from 'react';
 import CalendarEvent from '../../../models/CalendarEvent';
 import { now } from '../../../App';
 import DailyEvent, { EventState } from './components/DailyEvent';
@@ -7,16 +7,17 @@ import EventDetail from '../../../pages/EventDetail';
 import { Divider } from '../../Utilities';
 
 interface DayliCalendarProps {
-    onEventSelectedChanged?(selected: boolean): void;
-    className?: string;
     events: CalendarEvent[];
 }
 
 function DailyCalendar(props: DayliCalendarProps) {
-    
-    let events = props.events?.filter((event) => {
-        return event.start.toDateString() === now.toDateString();
-    })
+    const filterEvents = (events: CalendarEvent[]) => {
+        return events?.filter((event) => {
+            return event.start.toDateString() === now.toDateString();
+        })
+    }
+
+    let events = useMemo(() => filterEvents(props.events), [props.events]);
     const detailRef = useRef() as React.MutableRefObject<HTMLDivElement>;
     const opacityRef = useRef() as React.MutableRefObject<HTMLDivElement>;
 
@@ -26,10 +27,15 @@ function DailyCalendar(props: DayliCalendarProps) {
     const [nextEvents, setNextEvents] = useState<CalendarEvent[]>(events?.filter((event: CalendarEvent) => {return event.start.getTime() > now.getTime() ? true : false;}));
     
     const reloadEvents = function() {
+        console.log("reloading events");
         setPassedEvents(events?.filter((event: CalendarEvent) => {return event.stop.getTime() < Date.now() ? true : false;}));
         setCurrentEvents(events?.filter((event: CalendarEvent) => {return event.start.getTime() < Date.now() && event.stop.getTime() > Date.now() ? true : false;}));
         setNextEvents(events?.filter((event: CalendarEvent) => {return event.start.getTime() > Date.now() ? true : false;}));
     }
+
+    useEffect(() => {
+        reloadEvents();
+    }, [props.events]);
 
     const loadEvent = async (eventId : number) => {
         const event = events?.find((event) => {
@@ -37,7 +43,6 @@ function DailyCalendar(props: DayliCalendarProps) {
             if (event.id === eventId) return true;
         })
         setDetailEvent(event);
-        if (props.onEventSelectedChanged) props.onEventSelectedChanged(true);
         detailRef.current?.classList.remove('translate-y-full');
         opacityRef.current?.classList.add('opacity-25');
     }
@@ -46,7 +51,6 @@ function DailyCalendar(props: DayliCalendarProps) {
         if (!detailEvent) return;
         detailRef.current?.classList.add('translate-y-full');
         opacityRef.current?.classList.remove('opacity-25');
-        if (props.onEventSelectedChanged) props.onEventSelectedChanged(false);
         setTimeout(() => {
             setDetailEvent(undefined)
         }, 500);
@@ -57,7 +61,7 @@ function DailyCalendar(props: DayliCalendarProps) {
     }
 
     return (
-        <div className={`container min-h-full pb-5 bg-gray-100 background-pattern ${props.className}`} onClick={handleDetailClose}>
+        <div className={`container min-h-full pb-5 bg-gray-100 background-pattern`} onClick={handleDetailClose}>
             <div ref={opacityRef} className="transition-opacity duration-500 ease-in-out h-full">
                 {(!events) ? <div className="flex h-full items-center justify-center text-lg font-sans font-light text-blue-900">Chargement de l'agenda...</div> : <div></div>}
                 <Divider className="sticky top-0 bg-gray-100 py-1" label="Actuellement"/>
