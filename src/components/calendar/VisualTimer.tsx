@@ -44,7 +44,6 @@ function VisualTimer(props: VisualTimerProps) {
                 return <>{ClockIcon} {(pendingTime > 60) ? Math.round(pendingTime/60) + " h" : Math.round(pendingTime) + " min"}</>
             default:
                 return "Unknown"
-                break;
         }
     }
     
