@@ -15,7 +15,6 @@ function Agenda() {
   const [selectedSegment, setSelectedSegment] = useState<string>("weekly");
 
   const fetchData = async () => {
-    console.log("fetching data");
       // const response = await apiClient.get<CalendarEvent[]>('/events')
       
       // setEvents(plainToClass(CalendarEvent, response.data).sort((a, b) => {

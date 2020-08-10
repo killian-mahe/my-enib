@@ -32,8 +32,6 @@ function WeeklyCalendar(props: WeeklyCalendarProps) {
 
     const weeks = useMemo(() => getListOfWeeks(currentWeek), [currentWeek]);
 
-    console.log("Rendering WeeklyCalendar");
-
     return (
         <div className={`container h-full ${props.className}`}>
             {weeks ? <Slides hours={hours} weeks={weeks} events={props.events}/> : <></>}

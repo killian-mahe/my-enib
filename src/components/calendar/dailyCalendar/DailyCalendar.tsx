@@ -43,6 +43,7 @@ function DailyCalendar(props: DayliCalendarProps) {
     }
 
     const handleDetailClose = () => {
+        if (!detailEvent) return;
         detailRef.current?.classList.add('translate-y-full');
         opacityRef.current?.classList.remove('opacity-25');
         if (props.onEventSelectedChanged) props.onEventSelectedChanged(false);
@@ -55,10 +56,8 @@ function DailyCalendar(props: DayliCalendarProps) {
         if (!detailEvent) loadEvent(eventId);
     }
 
-    console.log("Rendering DailyCalendar");
-
     return (
-        <div className={`container min-h-full pb-5 bg-gray-100 background-pattern ${props.className}`}>
+        <div className={`container min-h-full pb-5 bg-gray-100 background-pattern ${props.className}`} onClick={handleDetailClose}>
             <div ref={opacityRef} className="transition-opacity duration-500 ease-in-out h-full">
                 {(!events) ? <div className="flex h-full items-center justify-center text-lg font-sans font-light text-blue-900">Chargement de l'agenda...</div> : <div></div>}
                 <Divider className="sticky top-0 bg-gray-100 py-1" label="Actuellement"/>
@@ -81,7 +80,7 @@ function DailyCalendar(props: DayliCalendarProps) {
                 }
             </div>
             <div ref={detailRef} className="fixed bottom-0 inset-x-0 h-3/4 top-1/4 transition-transform transform translate-y-full duration-500 ease-in-out rounded-t-xl bg-white shadow-2xl">
-                {detailEvent ? <EventDetail event={detailEvent} onClose={handleDetailClose}/> : <div/> }
+                {detailEvent ? <EventDetail event={detailEvent}/> : <div/> }
             </div>
         </div>
     );
