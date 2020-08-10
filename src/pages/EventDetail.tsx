@@ -1,22 +1,29 @@
 import React from 'react';
-import CalendarEvent from '../models/CalendarEvent';
 import { IonIcon } from '@ionic/react';
 import { chevronBack } from 'ionicons/icons';
+import CalendarEvent from '../models/CalendarEvent';
 
 interface EventDetailProps {
     event: CalendarEvent;
     className?: string | undefined;
+    onClose?(): void;
 }
 
 function EventDetail(props: EventDetailProps) {
     
     return (
-            <div className={`p-6 h-full overflow-y-scroll ${props.className}`}>
-                <div className="text-2xl justify-center font-sans font-medium">{props.event.course[0].name}</div>
-                <div className="grid grid-cols-1 mt-3 divide-y divide-gray-300">
-                    <Row attribute="Professeur" value={props.event.course[0].professor}/>
-                    <Row attribute="Salle" value={props.event.course[0].classRoom}/>
-                    <Row attribute="Durée" value={_getDuration(props.event)}/>
+            <div className={`p-6 h-full z-20 ${props.className}`}>
+                <div className="flex items-center w-auto mb-4" onClick={() => { if(props.onClose) props.onClose() }}>
+                    <IonIcon icon={chevronBack} className="text-blue-800" size='large'/>
+                    <span className="text-base text-blue-800 font-sans font-bold">Back</span>
+                </div>
+                <div className="overflow-y-scroll h-3/4">
+                    <div className="text-2xl justify-center font-sans font-medium">{props.event.course[0].name}</div>
+                    <div className="grid grid-cols-1 mt-3 divide-y divide-gray-300">
+                        <Row attribute="Professeur" value={props.event.course[0].professor}/>
+                        <Row attribute="Salle" value={props.event.course[0].classRoom}/>
+                        <Row attribute="Durée" value={_getDuration(props.event)}/>
+                    </div>
                 </div>
             </div>
     );

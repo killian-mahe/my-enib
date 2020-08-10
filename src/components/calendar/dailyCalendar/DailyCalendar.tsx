@@ -44,13 +44,13 @@ function DailyCalendar(props: DayliCalendarProps) {
         })
         setDetailEvent(event);
         detailRef.current?.classList.remove('translate-y-full');
-        opacityRef.current?.classList.add('opacity-25');
+        opacityRef.current?.classList.remove('hidden');
     }
 
     const handleDetailClose = () => {
         if (!detailEvent) return;
         detailRef.current?.classList.add('translate-y-full');
-        opacityRef.current?.classList.remove('opacity-25');
+        opacityRef.current?.classList.add('hidden');
         setTimeout(() => {
             setDetailEvent(undefined)
         }, 500);
@@ -61,8 +61,9 @@ function DailyCalendar(props: DayliCalendarProps) {
     }
 
     return (
-        <div className={`container min-h-full pb-5 bg-gray-100 background-pattern`} onClick={handleDetailClose}>
-            <div ref={opacityRef} className="transition-opacity duration-500 ease-in-out h-full">
+        <div className={`container min-h-full pb-5 bg-gray-100 background-pattern`}>
+            <div className="transition-opacity duration-500 ease-in-out h-full">
+                <div ref={opacityRef} className="bg-black fixed hidden inset-0 transition opacity-25 duration-500 ease-in-out z-10" onClick={handleDetailClose}/>
                 {(!events) ? <div className="flex h-full items-center justify-center text-lg font-sans font-light text-blue-900">Chargement de l'agenda...</div> : <div></div>}
                 <Divider className="sticky top-0 bg-gray-100 py-1" label="Actuellement"/>
                 {
@@ -83,8 +84,8 @@ function DailyCalendar(props: DayliCalendarProps) {
                     })
                 }
             </div>
-            <div ref={detailRef} className="fixed bottom-0 inset-x-0 h-3/4 top-1/4 transition-transform transform translate-y-full duration-500 ease-in-out rounded-t-xl bg-white shadow-2xl">
-                {detailEvent ? <EventDetail event={detailEvent}/> : <div/> }
+            <div ref={detailRef} className="fixed z-20 bottom-0 inset-x-0 h-3/4 top-1/4 transition-transform transform translate-y-full duration-500 ease-in-out rounded-t-xl bg-white shadow-2xl">
+                {detailEvent ? <EventDetail event={detailEvent} onClose={handleDetailClose}/> : <div/> }
             </div>
         </div>
     );

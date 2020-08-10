@@ -14881,6 +14881,11 @@ video {
   height: 900px;
 }
 
+.backdrop {
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+}
+
 @media (min-width: 640px) {
   .sm\:container {
     width: 100%;

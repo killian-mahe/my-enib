@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { IonContent, IonHeader, IonIcon, IonPage, IonTitle, IonToolbar, IonSpinner, IonRefresher, IonRefresherContent } from '@ionic/react';
+import { IonContent, IonHeader, IonIcon, IonPage, IonTitle, IonToolbar, IonSpinner } from '@ionic/react';
 import { IonSegment, IonSegmentButton } from '@ionic/react';
 import { calendarOutline } from 'ionicons/icons';
 import DailyCalendar from '../components/calendar/dailyCalendar/DailyCalendar';
@@ -51,9 +51,9 @@ function Agenda() {
             <IonSegmentButton value="weekly">Semaine</IonSegmentButton>
           </IonSegment>
         </IonToolbar>
-        <IonRefresher className="z-10" slot="fixed" onIonRefresh={(event) => fetchData().then(() => event.detail.complete())}>
+        {/* <IonRefresher className="z-10" slot="fixed" onIonRefresh={(event) => fetchData().then(() => event.detail.complete())}>
             <IonRefresherContent refreshingSpinner="circles"></IonRefresherContent>
-        </IonRefresher>
+        </IonRefresher> */}
           {
             events ? <><span className={selectedSegment === "daily" ? '' : 'hidden'}><DailyCalendar events={events}/></span> <span className={selectedSegment === "weekly" ? '' : 'hidden'}><WeeklyCalendar events={events}/></span></> : <div className="flex h-full items-center justify-center"><IonSpinner className="transform scale-150" name="crescent" /></div>
           }
