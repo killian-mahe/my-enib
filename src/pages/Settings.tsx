@@ -1,5 +1,6 @@
 import React from 'react';
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import Category from '../components/settings/Category';
 
 function Settings() {
   return (
@@ -10,6 +11,7 @@ function Settings() {
         </IonToolbar>
       </IonHeader>
       <IonContent>
+        <Category name="Apparence"><span>Hello</span></Category>
       </IonContent>
     </IonPage>
   );
