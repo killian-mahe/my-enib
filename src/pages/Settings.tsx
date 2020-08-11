@@ -5,16 +5,11 @@ function Settings() {
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar>
-          <IonTitle>Tab 3</IonTitle>
+        <IonToolbar mode="ios">
+          <IonTitle>Paramètres</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Tab 3</IonTitle>
-          </IonToolbar>
-        </IonHeader>
       </IonContent>
     </IonPage>
   );

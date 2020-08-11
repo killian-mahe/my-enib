@@ -1,7 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { IonContent, IonHeader, IonIcon, IonPage, IonTitle, IonToolbar, IonSpinner } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonSpinner } from '@ionic/react';
 import { IonSegment, IonSegmentButton } from '@ionic/react';
-import { calendarOutline } from 'ionicons/icons';
 import DailyCalendar from '../components/calendar/dailyCalendar/DailyCalendar';
 import WeeklyCalendar from '../components/calendar/weeklyCalendar/WeeklyCalendar';
 import CalendarEvent from '../models/CalendarEvent';
@@ -40,7 +39,7 @@ function Agenda() {
     <IonPage>
       <IonHeader className="z-0">
         <IonToolbar mode="ios">
-          <IonTitle><IonIcon icon={calendarOutline} /> Agenda</IonTitle>
+          <IonTitle>Agenda</IonTitle>
         </IonToolbar>
       </IonHeader>
         
