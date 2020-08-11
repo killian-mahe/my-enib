@@ -29,7 +29,7 @@ function DayCol({hours, day, className, events}: DayProps) {
             {visualIndicator()}
             {
                 hoursMap.map((hour) => {
-                    return <div className="flex-1 w-full border-l border-t border-solid border-gray-200" key={hour}><div className="w-full h-half border-b border-solid border-gray-100"/></div>
+                    return <div className="flex-1 w-full border-l border-t border-solid border-gray-200" key={hour}><div className="hr"/></div>
                 })
             }
             {

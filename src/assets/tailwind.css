@@ -1,6 +1,4 @@
 @tailwind base;
-@tailwind components;
-@tailwind utilities;
 
 
 .overflow-hidden-force {
@@ -25,3 +23,14 @@
     -webkit-backdrop-filter: blur(20px);
     backdrop-filter: blur(20px);
 }
+
+.hr {
+    @apply w-full;
+    @apply h-half;
+    @apply border-b;
+    @apply border-solid;
+    @apply border-gray-100;
+}
+
+@tailwind components;
+@tailwind utilities;

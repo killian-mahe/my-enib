@@ -17,12 +17,14 @@ function EventDetail(props: EventDetailProps) {
                     <IonIcon icon={chevronBack} className="text-blue-800" size='large'/>
                     <span className="text-base text-blue-800 font-sans font-bold">Back</span>
                 </div>
-                <div className="overflow-y-scroll h-3/4">
+                <div className="overflow-y-scroll h-9/10">
                     <div className="text-2xl justify-center font-sans font-medium">{props.event.course[0].name}</div>
                     <div className="grid grid-cols-1 mt-3 divide-y divide-gray-300">
                         <Row attribute="Professeur" value={props.event.course[0].professor}/>
                         <Row attribute="Salle" value={props.event.course[0].classRoom}/>
                         <Row attribute="Durée" value={_getDuration(props.event)}/>
+                        <Row attribute="De" value={props.event.start.toHourFormat()}/>
+                        <Row attribute="A" value={props.event.stop.toHourFormat()}/>
                     </div>
                 </div>
             </div>
