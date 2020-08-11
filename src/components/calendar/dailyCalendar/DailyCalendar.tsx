@@ -63,28 +63,32 @@ function DailyCalendar(props: DayliCalendarProps) {
     return (
         <div className={`container min-h-full pb-5 bg-gray-100 background-pattern`}>
             <div className="transition-opacity duration-500 ease-in-out h-full">
-                <div ref={opacityRef} className="bg-black fixed hidden inset-0 transition opacity-25 duration-500 ease-in-out z-10" onClick={handleDetailClose}/>
+                <div ref={opacityRef} className="bg-black fixed hidden inset-0 transition opacity-25 duration-500 ease-in-out z-30" onClick={handleDetailClose}/>
                 {(!events) ? <div className="flex h-full items-center justify-center text-lg font-sans font-light text-blue-900">Chargement de l'agenda...</div> : <div></div>}
-                <Divider className="sticky top-0 bg-gray-100 py-1" label="Actuellement"/>
+                <div className="pb-3">
+                <Divider className="sticky top-0 bg-gray-100 py-1 z-20" label="Actuellement"/>
                 {
                     currentEvents?.map((event) => {
-                        return <div className="my-3 mx-5 shadow-md" onClick={() => handleOnEventClick(event.id)} key={event.id}><DailyEvent event={event} state={EventState.now} onStateChanged={reloadEvents}/></div>
+                        return <div className="mt-3 mx-5 shadow-md" onClick={() => handleOnEventClick(event.id)} key={event.id}><DailyEvent event={event} state={EventState.now} onStateChanged={reloadEvents}/></div>
                     })
                 }
-                <Divider className="sticky top-0 bg-gray-100 py-1" label="Prochain cours"/>
+                </div>
+                <div className="pb-3">
+                <Divider className="sticky top-0 bg-gray-100 py-1 z-20" label="Prochain cours"/>
                 {
                     nextEvents?.map((event) => {
-                        return <div className="my-3 mx-5 shadow-md" onClick={() => handleOnEventClick(event.id)} key={event.id}><DailyEvent event={event} state={EventState.next} onStateChanged={reloadEvents}/></div>
+                        return <div className="mt-3 mx-5 shadow-md" onClick={() => handleOnEventClick(event.id)} key={event.id}><DailyEvent event={event} state={EventState.next} onStateChanged={reloadEvents}/></div>
                     })
                 }
-                <Divider className="sticky top-0 bg-gray-100 py-1" label="Cours passés"/>
+                </div>
+                <Divider className="sticky top-0 bg-gray-100 py-1 z-20" label="Cours passés"/>
                 {
                     passedEvents?.map((event) => {
-                        return <div className="my-3 mx-5 shadow-md" onClick={() => handleOnEventClick(event.id)} key={event.id}><DailyEvent event={event} state={EventState.passed} onStateChanged={reloadEvents}/></div>
+                        return <div className="mt-3 mx-5 shadow-md" onClick={() => handleOnEventClick(event.id)} key={event.id}><DailyEvent event={event} state={EventState.passed} onStateChanged={reloadEvents}/></div>
                     })
                 }
             </div>
-            <div ref={detailRef} className="fixed z-20 bottom-0 inset-x-0 h-3/4 top-1/4 transition-transform transform translate-y-full duration-500 ease-in-out rounded-t-xl bg-white shadow-2xl">
+            <div ref={detailRef} className="fixed z-30 bottom-0 inset-x-0 h-3/4 top-1/4 transition-transform transform translate-y-full duration-500 ease-in-out rounded-t-xl bg-white shadow-2xl">
                 {detailEvent ? <EventDetail event={detailEvent} onClose={handleDetailClose}/> : <div/> }
             </div>
         </div>
