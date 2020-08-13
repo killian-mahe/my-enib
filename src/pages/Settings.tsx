@@ -1,7 +1,8 @@
 import React from 'react';
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import Category from '../components/settings/Category';
-import { TwitterPicker } from 'react-color';
+import ColorBox from '../components/settings/ColorBox';
+import SettingsRow from '../components/settings/SettingsRow';
 
 function Settings() {
   return (
@@ -13,12 +14,10 @@ function Settings() {
       </IonHeader>
       <IonContent>
         <Category name="Apparence">
-          <div className="divide-y divide-gray-400">
-            <TwitterPicker/>
-            <div>Hello</div>
-            <div>Hello</div>
-            <div>Hello</div>
-          </div>
+          <ul className="divide-y divide-gray-400">
+            <SettingsRow label="Couleur principale"><ColorBox color="#194D33"/></SettingsRow>
+            <SettingsRow label="Couleur d'accentuation"><ColorBox color="#194D33"/></SettingsRow>
+          </ul>
         </Category>
       </IonContent>
     </IonPage>
