@@ -6,8 +6,13 @@ import WeeklyCalendar from '../components/calendar/weeklyCalendar/WeeklyCalendar
 import CalendarEvent from '../models/CalendarEvent';
 // import { apiClient } from '../App';
 import { _mockEvents } from '../components/Utilities';
+import Preferences from '../models/Preferences';
 
-function Agenda() {
+interface AgendaProps {
+  preferences: Preferences;
+}
+
+function Agenda(props: AgendaProps) {
 
   const [events, setEvents] = useState<CalendarEvent[]>();
   const contentRef = useRef() as React.MutableRefObject<HTMLIonContentElement>;
@@ -54,7 +59,7 @@ function Agenda() {
             <IonRefresherContent refreshingSpinner="circles"></IonRefresherContent>
         </IonRefresher> */}
           {
-            events ? <><span className={selectedSegment === "daily" ? '' : 'hidden'}><DailyCalendar events={events}/></span> <span className={selectedSegment === "weekly" ? '' : 'hidden'}><WeeklyCalendar events={events}/></span></> : <div className="flex h-full items-center justify-center"><IonSpinner className="transform scale-150" name="crescent" /></div>
+            events ? <><span className={selectedSegment === "daily" ? '' : 'hidden'}><DailyCalendar events={events}/></span> <span className={selectedSegment === "weekly" ? '' : 'hidden'}><WeeklyCalendar events={events} preferences={props.preferences}/></span></> : <div className="flex h-full items-center justify-center"><IonSpinner className="transform scale-150" name="crescent" /></div>
           }
       </IonContent>
     </IonPage>

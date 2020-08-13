@@ -1,15 +1,17 @@
 import React from 'react';
 import CalendarEvent from '../../../../models/CalendarEvent';
 import WeeklyEvent from './WeeklyEvent';
+import Preferences from '../../../../models/Preferences';
 
 interface DayProps {
     hours: number;
     day: Date;
     className?: string;
+    preferences: Preferences;
     events?: CalendarEvent[];
 }
 
-function DayCol({hours, day, className, events}: DayProps) {
+function DayCol({hours, day, className, preferences, events}: DayProps) {
 
     const hoursMap = [] as number[];
     for (let index = 1; index <= hours; index++) {
@@ -34,7 +36,7 @@ function DayCol({hours, day, className, events}: DayProps) {
             }
             {
                 events?.map((event) => {
-                    return <WeeklyEvent event={event} style={{'position': 'absolute', 'top': _getPosition(event, hoursMap), 'height': _getHeight(event, hoursMap)}} key={event.id}/>
+                    return <WeeklyEvent preferences={preferences} event={event} style={{'position': 'absolute', 'top': _getPosition(event, hoursMap), 'height': _getHeight(event, hoursMap)}} key={event.id}/>
                 })
             }
         </div>

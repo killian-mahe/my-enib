@@ -14,12 +14,16 @@ import {
 import { IonReactRouter } from '@ionic/react-router';
 import { settingsOutline, calendarOutline } from 'ionicons/icons';
 import axios, {AxiosInstance} from 'axios';
+import { Plugins } from '@capacitor/core';
 // import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
 
 /* Local Components */
 import Agenda from './pages/Agenda';
 import Settings from './pages/Settings';
 import Welcome from './pages/Welcome';
+
+/* Local Models */
+import Preferences from './models/Preferences';
 
 /* Firebase imports */
 import firebase from 'firebase/app';
@@ -45,6 +49,8 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 
+const { Storage } = Plugins;
+
 export const apiClient: AxiosInstance = axios.create({
   baseURL: 'https://5f21742fdaa42f0016665b91.mockapi.io/api/v1',
   responseType: 'json',
@@ -61,10 +67,23 @@ setInterval(() => {
 
 function App() {
   
-  let [user, setUser] = useState<firebase.User | null>();
+  const [user, setUser] = useState<firebase.User | null>();
+  const [preferences, setPreferences] = useState<Preferences>();
+
+  async function getPreferences() {
+    const { value } = await Storage.get({key: 'preferences'});
+    console.log(value);
+    if (value == null) {
+      setPreferences({primaryColor: "#5DADE2", secondaryColor: "#2471A3"} as Preferences)
+    }
+    else {
+      setPreferences(JSON.parse(value!) as Preferences);
+    }
+  }
 
   useEffect(() => {
 
+    getPreferences();
     let firebaseConfig = {
       apiKey: "AIzaSyD-X14crhzKPOjhelemwOViUCiDUwe07S0",
       authDomain: "my-enib.firebaseapp.com",
@@ -99,10 +118,10 @@ function App() {
         <IonTabs>
           <IonRouterOutlet>
             <Route path="/agenda" exact>
-              <Agenda />
+              <Agenda preferences={preferences!}/>
             </Route>
             <Route path="/settings" >
-              <Settings />
+              <Settings preferences={preferences!} onPreferencesChanged={getPreferences}/>
             </Route>
             <Route path="/" render={() => <Redirect to="/agenda" />} exact={true} />
           </IonRouterOutlet>

@@ -4,6 +4,7 @@ import { TwitterPicker } from 'react-color';
 interface ColorBoxProps {
     color: string;
     onClick?(): void;
+    onColorChanged?(color: string): void;
 }
 
 function ColorBox(props: ColorBoxProps) {
@@ -21,6 +22,7 @@ function ColorBox(props: ColorBoxProps) {
 
     const handleOnChange = (color: any, event: any) => {
         setColor(color.hex);
+        props.onColorChanged!(color.hex);
     }
 
     return (

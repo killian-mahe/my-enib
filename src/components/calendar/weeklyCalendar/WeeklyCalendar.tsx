@@ -3,17 +3,20 @@ import { IonSlides } from '@ionic/react';
 import Week from './components/Week';
 import { now } from '../../../App';
 import CalendarEvent from '../../../models/CalendarEvent';
+import Preferences from '../../../models/Preferences';
 // import { plainToClass } from 'class-transformer';
 
 interface WeeklyCalendarProps {
     className?: string;
     events: CalendarEvent[];
+    preferences: Preferences;
 }
 
 interface SlidesProps {
     hours: number[];
     weeks: number[];
     events?: CalendarEvent[];
+    preferences: Preferences;
 }
 
 function WeeklyCalendar(props: WeeklyCalendarProps) {
@@ -34,7 +37,7 @@ function WeeklyCalendar(props: WeeklyCalendarProps) {
 
     return (
         <div className={`container h-full ${props.className}`}>
-            {weeks ? <Slides hours={hours} weeks={weeks} events={props.events}/> : <></>}
+            {weeks ? <Slides preferences={props.preferences} hours={hours} weeks={weeks} events={props.events}/> : <></>}
         </div>
     );
 }
@@ -51,7 +54,7 @@ function Slides(props: SlidesProps) {
         <IonSlides className="w-full weekly-calendar" options={slideOpts} ref={slidesRef}>
             {
                 props.weeks?.map((week) => {
-                    return <Week hours={props.hours} key={week} week={week} events={props.events?.filter((event) => { return event.start.getWeek() === week})}/>
+                    return <Week preferences={props.preferences} hours={props.hours} key={week} week={week} events={props.events?.filter((event) => { return event.start.getWeek() === week})}/>
                 })
             }
         </IonSlides>

@@ -1,21 +1,25 @@
 import React, { useState } from 'react';
 import { IonAlert } from '@ionic/react';
 import CalendarEvent from '../../../../models/CalendarEvent';
+import { Plugins } from '@capacitor/core';
+import Preferences from '../../../../models/Preferences';
+const { Storage } = Plugins;
 
 interface WeeklyEvent {
     event: CalendarEvent;
     style?: React.CSSProperties;
     className?: string;
+    preferences: Preferences;
 }
 
-function WeeklyEvent({event, style, className}: WeeklyEvent) {
+function WeeklyEvent({event, style, className, preferences}: WeeklyEvent) {
 
     const [showAlert, setShowAlert] = useState(false);
 
     return (
         <>
             <div className={`w-full px-1 ${className}`} style={style} onClick={() => setShowAlert(true)}>
-                <div className="bg-blue-500 hover:bg-blue-700 rounded w-full h-full flex flex-col content-around justify-center">
+                <div className="rounded w-full h-full flex flex-col content-around justify-center" style={{'backgroundColor': preferences.primaryColor}}>
                     <span className="uppercase text-white font-sans font-bold text-sm">{_getAbbrName(event.course[0].name)}</span>
                     <span className="text-white font-sans text-2xs">{event.course[0].classRoom}</span>
                 </div>
