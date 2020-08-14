@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { IonAlert } from '@ionic/react';
 import CalendarEvent from '../../../../models/CalendarEvent';
-import { Plugins } from '@capacitor/core';
 import Preferences from '../../../../models/Preferences';
-const { Storage } = Plugins;
 
 interface WeeklyEvent {
     event: CalendarEvent;
